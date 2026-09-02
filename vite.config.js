@@ -7,4 +7,5 @@ export default defineConfig({
     { enforce: "pre", ...mdx({ providerImportSource: "@mdx-js/react" }) },
     react(),
   ],
+  base: '/nyu_coding/'
 });
