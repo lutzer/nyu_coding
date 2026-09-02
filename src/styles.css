@@ -8,40 +8,49 @@ body {
 }
 
 .layout {
-  display: grid;
-  grid-template-columns: 220px 1fr;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
 
-.sidebar {
-  padding: 24px 16px;
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
   background: #fff;
-  border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
   position: sticky;
   top: 0;
-  height: 100vh;
-  overflow-y: auto;
+  z-index: 10;
+  justify-content: space-between;
 }
 
-.sidebar h2 {
+.header h2 {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: #888;
-  margin: 0 0 12px;
+  margin: 0;
 }
 
-.sidebar ul { list-style: none; padding: 0; margin: 0; }
-.sidebar li { margin: 4px 0; }
-.sidebar a {
-  display: block;
+.lesson-picker-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.lesson-picker {
+  font: inherit;
   padding: 6px 10px;
   border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #fff;
   color: #333;
-  text-decoration: none;
   text-transform: capitalize;
+  cursor: pointer;
 }
-.sidebar a:hover { background: #f2f2f2; }
+.lesson-picker:hover { background: #f2f2f2; }
 
 .content {
   padding: 40px 56px;
