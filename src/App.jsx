@@ -37,7 +37,7 @@ export default function App() {
   return (
     <div className="layout">
       <header className="header">
-        <h1>Coding Course</h1>
+        <h1>NYU Coding Course</h1>
         <div className="lesson-picker-container">
           <h2>Lessons</h2>
           <LessonPicker />
