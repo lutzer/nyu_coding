@@ -1,0 +1,29 @@
+body {
+  font-family: system-ui, sans-serif;
+  background: #fafafa;
+  color: #222;
+  padding: 24px;
+}
+
+h1 {
+  color: #6633cc;
+}
+
+p {
+  line-height: 1.5;
+}
+
+.intro {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+#callout {
+  background: #fff4c2;
+  border-left: 4px solid #e5b800;
+  padding: 8px 12px;
+}
+
+li {
+  margin-bottom: 4px;
+}

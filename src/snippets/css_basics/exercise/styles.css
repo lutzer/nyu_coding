@@ -1,0 +1,16 @@
+/*
+  Exercise: give this page some style.
+
+  1. Change the background colour of the <body>.
+  2. Make the <h1> a different colour.
+  3. Make the paragraph with class "intro" italic.
+     Hint: use   .intro { font-style: italic; }
+  4. Highlight the list item with class "best" — for example, a
+     yellow background or bold text.
+
+  Try changing the values and watch the preview update.
+*/
+
+body {
+  font-family: system-ui, sans-serif;
+}

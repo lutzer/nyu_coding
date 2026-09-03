@@ -1,0 +1,152 @@
+export const title = "CSS Basics";
+export const chapter = "Chapter 1: Web Basics";
+
+# CSS Basics
+
+HTML gives your page *content*. **CSS** (Cascading Style Sheets) gives it
+a *look*: colours, fonts, spacing, sizes.
+
+The same HTML can look completely different depending on the CSS attached
+to it. That is the whole point — the structure stays clean, the styling
+lives in a separate file.
+
+<SandpackSnippet folder="css_basics/overview" template="static" activeFile="/styles.css" />
+
+## How CSS attaches to HTML
+
+The most common way — and the one we will use throughout the course — is a
+separate `.css` file linked from the `<head>`:
+
+```
+<link rel="stylesheet" href="styles.css" />
+```
+
+You can also put CSS directly in a `<style>` tag inside the page, or as an
+`style="..."` attribute on a single element, but keeping styles in their
+own file is what you'll see in real projects.
+
+## The shape of a CSS rule
+
+Every CSS rule has three parts:
+
+```
+h1 {
+  color: purple;
+}
+```
+
+- **`h1`** — the *selector*. It picks which elements this rule applies to.
+- **`color`** — the *property*. What are we changing?
+- **`purple`** — the *value*. What are we changing it to?
+
+The property/value pair sits inside `{ ... }` and ends with a semicolon.
+A rule can set as many properties as you like:
+
+```
+h1 {
+  color: purple;
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+```
+
+## Selectors
+
+Three selectors will cover most of what you need at first:
+
+### By tag name
+
+Targets every element of that type.
+
+```
+p {
+  line-height: 1.5;
+}
+```
+
+### By class
+
+Add a `class` attribute in the HTML, then select it with a leading dot.
+Multiple elements can share the same class.
+
+```
+<p class="intro">Welcome!</p>
+```
+
+```
+.intro {
+  font-weight: bold;
+}
+```
+
+### By id
+
+An `id` is meant to be unique to *one* element. Select it with a leading `#`.
+
+```
+<p id="callout">Read this bit.</p>
+```
+
+```
+#callout {
+  background: yellow;
+}
+```
+
+Prefer classes over ids for styling — you'll almost always end up wanting
+the same look on more than one element.
+
+## Common properties
+
+A small handful of properties will get you a surprisingly long way:
+
+- `color` — text colour.
+- `background` (or `background-color`) — background colour.
+- `font-family` — which font to use (e.g. `system-ui, sans-serif`).
+- `font-size` — how big the text is (e.g. `16px`, `1.2rem`).
+- `font-weight` — `normal`, `bold`, or a number like `600`.
+- `text-align` — `left`, `center`, `right`.
+- `padding` — space *inside* an element, between its content and its edge.
+- `margin` — space *outside* an element, between it and its neighbours.
+- `border` — a line around the element, e.g. `1px solid black`.
+
+## Colours
+
+You can write colours in several ways:
+
+- Named colours: `red`, `steelblue`, `rebeccapurple`.
+- Hex codes: `#ff0000` (red), `#6633cc` (purple).
+- `rgb(...)` and `rgba(...)` for red/green/blue and optional transparency.
+
+Named colours are handy for quick experiments; hex codes are what you'll
+see most often in real designs.
+
+## The "cascading" part
+
+The **C** in CSS stands for *cascading*: when more than one rule could
+apply to the same element, the browser has rules for deciding which wins.
+The short version:
+
+1. More *specific* selectors win (an id beats a class beats a tag).
+2. If two rules are equally specific, the one written *later* wins.
+
+You don't need to memorise this yet — just know that if a style
+"isn't taking effect," it's usually because another, more specific rule is
+overriding it.
+
+## Exercise
+
+Open the snippet below. The HTML is already written for you; your job is
+to fill in `styles.css` so the page looks the way you want.
+
+Try to:
+
+1. Change the `<body>` background colour.
+2. Give the `<h1>` a different colour.
+3. Make the paragraph with class `intro` italic.
+4. Highlight the list item with class `best`.
+
+There is no single right answer — play with values and watch the preview
+update.
+
+<SandpackSnippet folder="css_basics/exercise" template="static" activeFile="/styles.css" />
