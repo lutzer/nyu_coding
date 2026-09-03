@@ -6,23 +6,7 @@ import {
   SandpackPreview,
   useSandpack,
 } from "@codesandbox/sandpack-react";
-
-const rawSnippets = import.meta.glob("../snippets/**/*", {
-  query: "?raw",
-  import: "default",
-  eager: true,
-});
-
-function loadFolder(folder) {
-  const prefix = `../snippets/${folder}/`;
-  const files = {};
-  for (const [path, content] of Object.entries(rawSnippets)) {
-    if (!path.startsWith(prefix)) continue;
-    const rel = "/" + path.slice(prefix.length);
-    files[rel] = content;
-  }
-  return files;
-}
+import { loadSnippetFiles, snippetStorageKey, snippetConfigKey } from "./snippetFiles";
 
 function safeReadJSON(key) {
   try {
@@ -43,6 +27,27 @@ function safeWriteJSON(key, value) {
   } catch {
     /* quota / privacy mode */
   }
+}
+
+function OpenPreviewButton({ folder, storageKey, pristineFiles, config }) {
+  const { sandpack } = useSandpack();
+  const onOpen = () => {
+    const overlay = {};
+    for (const [p, file] of Object.entries(sandpack.files)) {
+      const pristine = pristineFiles[p];
+      if (pristine === undefined) continue;
+      if (file.code !== pristine) overlay[p] = file.code;
+    }
+    safeWriteJSON(storageKey, overlay);
+    safeWriteJSON(snippetConfigKey(folder), config);
+    const base = window.location.pathname + window.location.search;
+    window.open(`${base}#/p/${folder}`, "_blank", "noopener");
+  };
+  return (
+    <button type="button" onClick={onOpen} className="preview-button">
+      Preview
+    </button>
+  );
 }
 
 function ResetButton({ storageKey, pristineFiles }) {
@@ -89,8 +94,8 @@ export function SandpackSnippet({
   customSetup,
   theme,
 }) {
-  const pristineFiles = useMemo(() => loadFolder(folder), [folder]);
-  const storageKey = `sandpack-snippet:v1:${folder}`;
+  const pristineFiles = useMemo(() => loadSnippetFiles(folder), [folder]);
+  const storageKey = snippetStorageKey(folder);
 
   const [initialFiles] = useState(() => {
     if (Object.keys(pristineFiles).length === 0) return {};
@@ -137,7 +142,15 @@ export function SandpackSnippet({
         />
         <SandpackPreview style={{ height: options?.editorHeight ?? 360 }} />
       </SandpackLayout>
-      <ResetButton storageKey={storageKey} pristineFiles={pristineFiles} />
+      <div className="button-group">
+        <ResetButton storageKey={storageKey} pristineFiles={pristineFiles} />
+        <OpenPreviewButton
+          folder={folder}
+          storageKey={storageKey}
+          pristineFiles={pristineFiles}
+          config={{ template, customSetup }}
+        />
+      </div>
       <PersistenceBridge storageKey={storageKey} pristineFiles={pristineFiles} />
     </SandpackProvider>
   );

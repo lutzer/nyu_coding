@@ -86,10 +86,7 @@ body {
   border-radius: 2px;
 }
 
-
-.reset-button {
-  position: relative;
-  top: -20px;
+button {
   font-size: 12;
   margin: var(--spacing-small);
   padding: 5px;
@@ -99,3 +96,21 @@ body {
   border: none;
   color: #8f8f8f;
 }
+
+.button-group {
+  position: relative;
+  margin-top: -15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .reset-button {
+  position: relative;
+  top: -20px;
+}
+
+.preview-button {
+  position: relative;
+  top: -20px;
+  right: 0px;
+} */

@@ -1,4 +1,5 @@
 import { Route, Routes, Navigate, useLocation, useNavigate } from "react-router-dom";
+import FullscreenPreview from "./components/FullscreenPreview";
 
 const pageModules = import.meta.glob("./content/*.mdx", { eager: true });
 
@@ -16,12 +17,12 @@ const pages = Object.entries(pageModules)
 function LessonPicker() {
   const location = useLocation();
   const navigate = useNavigate();
-  const currentSlug = location.pathname.replace(/^\//, "");
+  const currentSlug = location.pathname.replace(/^\/l\//, "");
   return (
     <select
       className="lesson-picker"
       value={pages.some((p) => p.slug === currentSlug) ? currentSlug : ""}
-      onChange={(e) => navigate(`/${e.target.value}`)}
+      onChange={(e) => navigate(`/l/${e.target.value}`)}
     >
       {pages.map((p) => (
         <option key={p.slug} value={p.slug}>
@@ -32,8 +33,7 @@ function LessonPicker() {
   );
 }
 
-export default function App() {
-  const first = pages[0];
+function LessonLayout({ children }) {
   return (
     <div className="layout">
       <header className="header">
@@ -43,14 +43,28 @@ export default function App() {
           <LessonPicker />
         </div>
       </header>
-      <main className="content">
-        <Routes>
-          {pages.map(({ slug, Component }) => (
-            <Route key={slug} path={`/${slug}`} element={<Component />} />
-          ))}
-          {first && <Route path="*" element={<Navigate to={`/${first.slug}`} replace />} />}
-        </Routes>
-      </main>
+      <main className="content">{children}</main>
     </div>
+  );
+}
+
+export default function App() {
+  const first = pages[0];
+  return (
+    <Routes>
+      <Route path="/p/*" element={<FullscreenPreview />} />
+      {pages.map(({ slug, Component }) => (
+        <Route
+          key={slug}
+          path={`/l/${slug}`}
+          element={
+            <LessonLayout>
+              <Component />
+            </LessonLayout>
+          }
+        />
+      ))}
+      {first && <Route path="*" element={<Navigate to={`/l/${first.slug}`} replace />} />}
+    </Routes>
   );
 }
