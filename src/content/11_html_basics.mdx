@@ -1,0 +1,65 @@
+export const title = "HTML Basics";
+
+# HTML Basics
+
+To build a website, there are three main languages you will learn in this
+course. Each one has its own job:
+
+- **HTML** (HyperText Markup Language) — describes the *structure* and
+  *content* of a page: headings, paragraphs, images, links.
+- **CSS** (Cascading Style Sheets) — describes the *appearance*: colours,
+  fonts, spacing, layout.
+- **JavaScript** — adds *behaviour*: reacting to clicks, loading data,
+  animating things, changing the page after it has loaded.
+
+We will start with HTML, because without content there is nothing to style or
+animate.
+
+## HTML Language
+
+HTML (HyperText Markup Language) is the basic structure of every webpage. Here's how it works, from the ground up.
+
+## The HTML skeleton
+
+<SandpackSnippet folder="html_basics/minimal" template="static" activeFile="/index.html" />
+
+Every HTML page is built on the same small skeleton:
+
+- **`<!DOCTYPE html>`** — the very first line, tells the browser this is a
+  modern HTML document.
+- **`<html>`** — the root element that wraps everything else.
+- **`<head>`** — information *about* the page (not shown on the page itself),
+  such as the character encoding and the `<title>` shown in the browser tab.
+- **`<body>`** — everything the visitor actually sees on the page.
+
+
+## Tags and Elements
+
+HTML is built from tags. Most come in pairs:
+
+```
+<p>This is a paragraph.</p>
+```
+
+* `<p>` is the opening tag
+* `</p>` is the closing tag (note the slash)
+* Together with the content, this whole thing is called an element
+
+## Attributes
+
+Tags can carry extra information called attributes, placed inside the opening tag:
+
+```
+<a href="https://example.com">Click here</a>
+<img src="cat.jpg" alt="A cat">
+```
+
+Here, href and src are attributes that give the browser more instructions.
+
+
+## Exercise
+
+In the snippet below, change the headline of the document 
+to something else and check if it correctly updates the preview.
+
+<SandpackSnippet folder="html_basics/exercise" template="static" activeFile="/index.html" />
