@@ -94,7 +94,7 @@ export function SandpackSnippet({
     );
   }
 
-  const editorHeight = fullscreen ? "90vh" : 360;
+  const editorHeight = fullscreen ? "90vh" : options?.editorHeight || 360;
   const config = { template, customSetup };
 
   return (
