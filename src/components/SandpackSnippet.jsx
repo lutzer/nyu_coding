@@ -131,9 +131,9 @@ export function SandpackSnippet({
       <SandpackLayout>
         <SandpackCodeEditor
           showLineNumbers
-          style={{ height: options?.editorHeight ?? 360 }}
+          style={{ height: options?.editorHeight ?? 400 }}
         />
-        <SandpackPreview style={{ height: options?.editorHeight ?? 360 }} />
+        <SandpackPreview style={{ height: options?.editorHeight ?? 400 }} />
       </SandpackLayout>
       <EditorButtons storageKey={storageKey} pristineFiles={pristineFiles}/>
       <PersistenceBridge storageKey={storageKey} pristineFiles={pristineFiles}/>
