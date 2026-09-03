@@ -6,76 +6,59 @@ import {
   SandpackPreview,
   useSandpack,
 } from "@codesandbox/sandpack-react";
-import { loadSnippetFiles, snippetStorageKey, snippetConfigKey } from "./snippetFiles";
+import {
+  loadSnippetFiles,
+  snippetConfigKey,
+  safeWriteJSON,
+  computeOverlay,
+  mergeOverlay,
+  loadOverlay,
+  saveOverlay,
+  clearOverlay,
+} from "./snippetFiles";
 
-function safeReadJSON(key) {
-  try {
-    const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : null;
-  } catch {
-    return null;
-  }
-}
-
-function safeWriteJSON(key, value) {
-  try {
-    if (!value || Object.keys(value).length === 0) {
-      localStorage.removeItem(key);
-    } else {
-      localStorage.setItem(key, JSON.stringify(value));
-    }
-  } catch {
-    /* quota / privacy mode */
-  }
-}
-
-function EditorButtons({ storageKey, pristineFiles }) {
+function EditorButtons({ folder, pristineFiles, config }) {
   const { sandpack } = useSandpack();
 
   function onResetEditor() {
-    safeWriteJSON(storageKey, null);
+    clearOverlay(folder);
     sandpack.updateFile(pristineFiles);
   }
 
   function onOpenPreview() {
-    console.log("open preview")
+    saveOverlay(folder, computeOverlay(sandpack.files, pristineFiles));
+    safeWriteJSON(snippetConfigKey(folder), config);
+    const base = window.location.pathname + window.location.search;
+    window.open(
+      `${base}#/p/${folder}`,
+      "snippet-preview",
+      "popup=yes,width=1200,height=800",
+    );
   }
 
   return (
     <div className="button-group">
-      <button
-        onClick={onResetEditor}
-        className="reset-button">
+      <button onClick={onResetEditor} className="reset-button">
         Reset
       </button>
-      {/* <button onClick={onOpenPreview} className="preview-button">
-        Preview
-      </button> */}
+      <button onClick={onOpenPreview} className="preview-button">
+        Open Preview 
+      </button>
     </div>
   );
 }
 
-function PersistenceBridge({ storageKey, pristineFiles }) {
+function PersistenceBridge({ folder, pristineFiles }) {
   const { sandpack } = useSandpack();
   const timerRef = useRef(null);
-
-  function reset() {
-    console.log("reset")
-  }
 
   useEffect(() => {
     clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
-      const overlay = {};
-      for (const [p, file] of Object.entries(sandpack.files)) {
-        const pristine = pristineFiles[p];
-        if (pristine === undefined) continue;
-        if (file.code !== pristine) overlay[p] = file.code;
-      }
-      safeWriteJSON(storageKey, overlay);
+      saveOverlay(folder, computeOverlay(sandpack.files, pristineFiles));
     }, 400);
     return () => clearTimeout(timerRef.current);
-  }, [sandpack.files, storageKey, pristineFiles]);
+  }, [sandpack.files, folder, pristineFiles]);
   return null;
 }
 
@@ -89,17 +72,13 @@ export function SandpackSnippet({
   theme,
 }) {
   const pristineFiles = useMemo(() => loadSnippetFiles(folder), [folder]);
-  const storageKey = snippetStorageKey(folder);
 
   const [initialFiles] = useState(() => {
     if (Object.keys(pristineFiles).length === 0) return {};
-    const overlay = safeReadJSON(storageKey) ?? {};
+    const merged = mergeOverlay(pristineFiles, loadOverlay(folder));
     const out = {};
-    for (const [p, code] of Object.entries(pristineFiles)) {
-      const chosen = Object.prototype.hasOwnProperty.call(overlay, p)
-        ? overlay[p]
-        : code;
-      out[p] = { code: chosen, active: p === activeFile };
+    for (const [p, code] of Object.entries(merged)) {
+      out[p] = { code, active: p === activeFile };
     }
     return out;
   });
@@ -112,34 +91,28 @@ export function SandpackSnippet({
     );
   }
 
-  options = { ...options, "editorHeight" : fullscreen ? "90vh" : 360 };
+  const editorHeight = fullscreen ? "90vh" : 360;
+  const config = { template, customSetup };
 
   return (
     <SandpackProvider
-      key={storageKey}
+      key={folder}
       template={template}
       files={initialFiles}
       customSetup={customSetup}
       theme={theme}
       options={{ ...options }}
     >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          padding: "4px 0",
-        }}
-      >
-      </div>
       <SandpackLayout>
-        <SandpackCodeEditor
-          showLineNumbers
-          style={{ height: options.editorHeight }}
-        />
-        <SandpackPreview style={{ height: options.editorHeight }} />
+        <SandpackCodeEditor showLineNumbers style={{ height: editorHeight }} />
+        <SandpackPreview style={{ height: editorHeight }} />
       </SandpackLayout>
-      <EditorButtons storageKey={storageKey} pristineFiles={pristineFiles}/>
-      <PersistenceBridge storageKey={storageKey} pristineFiles={pristineFiles}/>
+      <EditorButtons
+        folder={folder}
+        pristineFiles={pristineFiles}
+        config={config}
+      />
+      <PersistenceBridge folder={folder} pristineFiles={pristineFiles} />
     </SandpackProvider>
   );
 }
