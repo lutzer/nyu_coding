@@ -9,10 +9,26 @@ const pages = Object.entries(pageModules)
     return {
       slug,
       title: mod.title ?? slug.replace(/[-_]/g, " "),
+      chapter: mod.chapter ?? null,
       Component: mod.default,
     };
   })
   .sort((a, b) => a.slug.localeCompare(b.slug));
+
+function groupByChapter(items) {
+  const groups = [];
+  const byChapter = new Map();
+  for (const p of items) {
+    const key = p.chapter ?? "";
+    if (!byChapter.has(key)) {
+      const group = { chapter: p.chapter, pages: [] };
+      byChapter.set(key, group);
+      groups.push(group);
+    }
+    byChapter.get(key).pages.push(p);
+  }
+  return groups;
+}
 
 function LessonPicker() {
   const location = useLocation();
@@ -24,11 +40,23 @@ function LessonPicker() {
       value={pages.some((p) => p.slug === currentSlug) ? currentSlug : ""}
       onChange={(e) => navigate(`/l/${e.target.value}`)}
     >
-      {pages.map((p) => (
-        <option key={p.slug} value={p.slug}>
-          {p.title}
-        </option>
-      ))}
+      {groupByChapter(pages).map((group, i) =>
+        group.chapter ? (
+          <optgroup key={group.chapter} label={group.chapter}>
+            {group.pages.map((p) => (
+              <option key={p.slug} value={p.slug}>
+                {p.title}
+              </option>
+            ))}
+          </optgroup>
+        ) : (
+          group.pages.map((p) => (
+            <option key={p.slug} value={p.slug}>
+              {p.title}
+            </option>
+          ))
+        ),
+      )}
     </select>
   );
 }
