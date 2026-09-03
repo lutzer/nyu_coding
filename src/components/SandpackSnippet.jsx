@@ -82,6 +82,7 @@ function PersistenceBridge({ storageKey, pristineFiles }) {
 export function SandpackSnippet({
   folder,
   template = "react",
+  fullscreen = false,
   activeFile,
   options,
   customSetup,
@@ -111,6 +112,8 @@ export function SandpackSnippet({
     );
   }
 
+  options = { ...options, "editorHeight" : fullscreen ? "90vh" : 360 };
+
   return (
     <SandpackProvider
       key={storageKey}
@@ -131,9 +134,9 @@ export function SandpackSnippet({
       <SandpackLayout>
         <SandpackCodeEditor
           showLineNumbers
-          style={{ height: options?.editorHeight ?? 400 }}
+          style={{ height: options.editorHeight }}
         />
-        <SandpackPreview style={{ height: options?.editorHeight ?? 400 }} />
+        <SandpackPreview style={{ height: options.editorHeight }} />
       </SandpackLayout>
       <EditorButtons storageKey={storageKey} pristineFiles={pristineFiles}/>
       <PersistenceBridge storageKey={storageKey} pristineFiles={pristineFiles}/>
