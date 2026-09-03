@@ -36,7 +36,7 @@ function LessonPicker() {
   const currentSlug = location.pathname.replace(/^\/l\//, "");
   return (
     <select
-      className="lesson-picker"
+      className="lesson-picker shift-arrow"
       value={pages.some((p) => p.slug === currentSlug) ? currentSlug : ""}
       onChange={(e) => navigate(`/l/${e.target.value}`)}
     >
