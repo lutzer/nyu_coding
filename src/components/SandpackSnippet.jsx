@@ -29,47 +29,40 @@ function safeWriteJSON(key, value) {
   }
 }
 
-function OpenPreviewButton({ folder, storageKey, pristineFiles, config }) {
+function EditorButtons({ storageKey, pristineFiles }) {
   const { sandpack } = useSandpack();
-  const onOpen = () => {
-    const overlay = {};
-    for (const [p, file] of Object.entries(sandpack.files)) {
-      const pristine = pristineFiles[p];
-      if (pristine === undefined) continue;
-      if (file.code !== pristine) overlay[p] = file.code;
-    }
-    safeWriteJSON(storageKey, overlay);
-    safeWriteJSON(snippetConfigKey(folder), config);
-    const base = window.location.pathname + window.location.search;
-    window.open(`${base}#/p/${folder}`, "_blank", "noopener");
-  };
-  return (
-    <button type="button" onClick={onOpen} className="preview-button">
-      Preview
-    </button>
-  );
-}
 
-function ResetButton({ storageKey, pristineFiles }) {
-  const { sandpack } = useSandpack();
-  const onReset = () => {
+  function onResetEditor() {
     safeWriteJSON(storageKey, null);
     sandpack.updateFile(pristineFiles);
-  };
+  }
+
+  function onOpenPreview() {
+    console.log("open preview")
+  }
+
   return (
-    <button
-      type="button"
-      onClick={onReset}
-      className="reset-button"
-    >
-      Reset
-    </button>
+    <div className="button-group">
+      <button
+        onClick={onResetEditor}
+        className="reset-button">
+        Reset
+      </button>
+      {/* <button onClick={onOpenPreview} className="preview-button">
+        Preview
+      </button> */}
+    </div>
   );
 }
 
 function PersistenceBridge({ storageKey, pristineFiles }) {
   const { sandpack } = useSandpack();
   const timerRef = useRef(null);
+
+  function reset() {
+    console.log("reset")
+  }
+
   useEffect(() => {
     clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
@@ -142,16 +135,8 @@ export function SandpackSnippet({
         />
         <SandpackPreview style={{ height: options?.editorHeight ?? 360 }} />
       </SandpackLayout>
-      <div className="button-group">
-        <ResetButton storageKey={storageKey} pristineFiles={pristineFiles} />
-        <OpenPreviewButton
-          folder={folder}
-          storageKey={storageKey}
-          pristineFiles={pristineFiles}
-          config={{ template, customSetup }}
-        />
-      </div>
-      <PersistenceBridge storageKey={storageKey} pristineFiles={pristineFiles} />
+      <EditorButtons storageKey={storageKey} pristineFiles={pristineFiles}/>
+      <PersistenceBridge storageKey={storageKey} pristineFiles={pristineFiles}/>
     </SandpackProvider>
   );
 }

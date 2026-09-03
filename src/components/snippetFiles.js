@@ -19,15 +19,6 @@ export function loadSnippetFiles(folder) {
   return files;
 }
 
-export function readOverlay(folder) {
-  try {
-    const raw = localStorage.getItem(snippetStorageKey(folder));
-    return raw ? JSON.parse(raw) : {};
-  } catch {
-    return {};
-  }
-}
-
 export function snippetConfigKey(folder) {
   return `sandpack-snippet-config:v1:${folder}`;
 }
