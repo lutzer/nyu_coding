@@ -1,0 +1,123 @@
+export const title = "Important HTML Tags";
+export const chapter = "Chapter 1: Web Basics";
+
+# Important HTML Tags
+
+Now that you know how an HTML document is put together, let's look at the
+tags you will actually use most of the time — the ones that produce
+something *visible* on the page.
+
+<SandpackSnippet folder="html_tags/overview" template="static" activeFile="/index.html" />
+
+## Headings
+
+Headings give your page a structure, like chapters and sections in a book.
+There are six levels, from `<h1>` (most important) down to `<h6>` (least
+important).
+
+```
+<h1>Page title</h1>
+<h2>Section title</h2>
+<h3>Sub-section</h3>
+```
+
+A page should usually have exactly **one** `<h1>`, and then use `<h2>`,
+`<h3>`, ... to break the content down further.
+
+## Paragraphs
+
+Regular blocks of text go inside `<p>` (paragraph) tags. The browser
+automatically adds a little space above and below each paragraph.
+
+```
+<p>This is a paragraph of text.</p>
+<p>This is a second, separate paragraph.</p>
+```
+
+## Emphasis: bold and italic
+
+Inside a paragraph you can highlight words with:
+
+- `<strong>` — important text, usually rendered **bold**.
+- `<em>` — emphasised text, usually rendered *italic*.
+
+```
+<p>Please do <strong>not</strong> press the <em>red</em> button.</p>
+```
+
+## Links
+
+The `<a>` tag ("anchor") turns text into a clickable link. The `href`
+attribute says *where* the link goes.
+
+```
+<a href="https://example.com">Visit example.com</a>
+```
+
+You can link to another page on the same site (`href="about.html"`) or
+to an external URL that starts with `https://`.
+
+## Images
+
+The `<img>` tag shows a picture. It has no closing tag — it stands on its
+own. Two attributes matter:
+
+- `src` — the URL or file path of the image.
+- `alt` — a short text description, shown if the image fails to load and
+  read out loud by screen readers.
+
+```
+<img src="cat.jpg" alt="A sleeping cat" />
+```
+
+## Lists
+
+Two kinds of lists show up most often:
+
+- `<ul>` — an **unordered list** (bullet points).
+- `<ol>` — an **ordered list** (numbered).
+
+Both contain `<li>` (list item) elements.
+
+```
+<ul>
+  <li>Apples</li>
+  <li>Oranges</li>
+  <li>Pears</li>
+</ul>
+
+<ol>
+  <li>Boil water</li>
+  <li>Add pasta</li>
+  <li>Wait 10 minutes</li>
+</ol>
+```
+
+## Dividers and line breaks
+
+- `<hr />` draws a horizontal line — a visual break between sections.
+- `<br />` forces a single line break inside a paragraph. Use it sparingly;
+  most of the time a new `<p>` is better.
+
+## Grouping: `<div>` and `<span>`
+
+These two tags don't look like anything on their own, but they are useful
+containers you will style with CSS later.
+
+- `<div>` is a **block** container — good for grouping bigger chunks
+  (a card, a sidebar, a section).
+- `<span>` is an **inline** container — good for wrapping a few words
+  inside a paragraph so you can style them.
+
+```
+<div>
+  <p>Some text with a <span>highlighted word</span> in it.</p>
+</div>
+```
+
+## Exercise
+
+Build a tiny "about me" page. Open the snippet below and change it using only the
+tags from this chapter.
+
+<SandpackSnippet folder="html_tags/exercise" template="static" activeFile="/index.html" />
