@@ -15,6 +15,7 @@ import {
   loadOverlay,
   saveOverlay,
   clearOverlay,
+  loadPreviewWindowRect,
 } from "./snippetFiles";
 
 function EditorButtons({ folder, pristineFiles, config }) {
@@ -29,11 +30,13 @@ function EditorButtons({ folder, pristineFiles, config }) {
     saveOverlay(folder, computeOverlay(sandpack.files, pristineFiles));
     safeWriteJSON(snippetConfigKey(folder), config);
     const base = window.location.pathname + window.location.search;
-    window.open(
-      `${base}#/p/${folder}`,
-      "snippet-preview",
-      "popup=yes,width=1200,height=800",
-    );
+    const rect = loadPreviewWindowRect();
+    const width = rect?.width ?? 1200;
+    const height = rect?.height ?? 800;
+    const features = [`popup=yes`, `width=${width}`, `height=${height}`];
+    if (Number.isFinite(rect?.left)) features.push(`left=${rect.left}`, `screenX=${rect.left}`);
+    if (Number.isFinite(rect?.top)) features.push(`top=${rect.top}`, `screenY=${rect.top}`);
+    window.open(`${base}#/p/${folder}`, "snippet-preview", features.join(","));
   }
 
   return (

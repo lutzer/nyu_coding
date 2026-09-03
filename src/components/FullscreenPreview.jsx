@@ -11,7 +11,32 @@ import {
   snippetStorageKey,
   loadOverlay,
   mergeOverlay,
+  savePreviewWindowRect,
 } from "./snippetFiles";
+
+function usePersistWindowRect() {
+  useEffect(() => {
+    function snapshot() {
+      savePreviewWindowRect({
+        left: window.screenX,
+        top: window.screenY,
+        width: window.outerWidth,
+        height: window.outerHeight,
+      });
+    }
+    const interval = setInterval(snapshot, 1000);
+    window.addEventListener("resize", snapshot);
+    window.addEventListener("pagehide", snapshot);
+    window.addEventListener("beforeunload", snapshot);
+    return () => {
+      snapshot();
+      clearInterval(interval);
+      window.removeEventListener("resize", snapshot);
+      window.removeEventListener("pagehide", snapshot);
+      window.removeEventListener("beforeunload", snapshot);
+    };
+  }, []);
+}
 
 function LiveSync({ folder, pristineFiles }) {
   const { sandpack } = useSandpack();
@@ -34,6 +59,7 @@ function LiveSync({ folder, pristineFiles }) {
 export default function FullscreenPreview() {
   const params = useParams();
   const folder = params["*"] || "";
+  usePersistWindowRect();
 
   const pristine = useMemo(() => loadSnippetFiles(folder), [folder]);
   const files = useMemo(

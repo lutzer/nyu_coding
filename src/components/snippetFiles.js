@@ -82,3 +82,13 @@ export function saveOverlay(folder, overlay) {
 export function clearOverlay(folder) {
   safeWriteJSON(snippetStorageKey(folder), null);
 }
+
+export const previewWindowKey = "sandpack-preview-window:v1";
+
+export function loadPreviewWindowRect() {
+  return safeReadJSON(previewWindowKey);
+}
+
+export function savePreviewWindowRect(rect) {
+  safeWriteJSON(previewWindowKey, rect);
+}
