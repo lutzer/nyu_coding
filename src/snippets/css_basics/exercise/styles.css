@@ -1,12 +1,19 @@
 /*
-  Exercise: give this page some style.
+  Exercise: style this little gallery page for "Nighthawks".
 
-  1. Change the background colour of the <body>.
-  2. Make the <h1> a different colour.
-  3. Make the paragraph with class "intro" italic.
+  1. Give the <img> a max-width so it doesn't overflow, and try
+     adding a border or some padding around it like a frame.
+     Hint: img { max-width: 100%; }
+  2. Give the <body> a background colour that suits the painting
+  3. Give the <h1> — the painting's title — a colour and font-size
+     that make it feel like a title.
+  4. Make the paragraph with class "intro" italic.
      Hint: use   .intro { font-style: italic; }
-  4. Highlight the list item with class "best" — for example, a
-     yellow background or bold text.
+  5. The caption paragraph has id "caption" — make its text smaller
+     and a lighter grey so it reads like a museum label.
+  6. Highlight the <li> with class "best" (the location) — for
+     example, bold text or a coloured background.
+  
 
   Try changing the values and watch the preview update.
 */
