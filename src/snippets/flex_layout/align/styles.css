@@ -1,0 +1,46 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 10px;
+}
+
+p {
+  margin: 10px 0 5px 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.flex {
+  display: flex;
+  padding: 5px 10px;
+  gap: 10px;
+  background: #aaaaaa;
+}
+
+.start {
+  justify-content: start;
+}
+
+.center {
+  justify-content: center;
+}
+
+.space-around {
+  justify-content: space-around;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.space-evenly {
+  justify-content: space-evenly;
+}
+
+.end {
+  justify-content: end;
+}
+
+.item {
+  background: #f5c518;
+  padding: 5px 10px;
+}

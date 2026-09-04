@@ -1,0 +1,137 @@
+export const title = "Layout with Divs: Flex";
+export const chapter = "Chapter 1: Web Basics";
+
+# Layout with Flex
+
+In the last lesson we used **grid** to arrange cards into columns.
+Grid is great when you want a tidy *two-dimensional* layout — rows
+*and* columns lining up like a table.
+
+But often you just want to line a few things up in a *single* row or
+column: the links in a navigation bar, a logo on the left with menu
+items on the right, buttons sitting neatly next to each other. For
+that, CSS has a second tool called **flexbox** (or just *flex*).
+
+## A quick note: from divs to semantic tags
+
+Last lesson we used `<div class="header">`, `<div class="content">`
+and `<div class="footer">` for the outer regions of a page. That
+works, but a `<div>` doesn't actually *mean* anything — it's just a
+generic box, and the only clue about its role is the class name we
+happened to pick.
+
+HTML has *named* tags for these common roles. Using them instead of
+divs makes the structure of the page obvious at a glance — to you,
+to the next person reading your code, and to tools like screen
+readers and search engines that can't see the visual layout. Visually
+they behave just like a `<div>`; the difference is meaning, not
+looks. From here on we'll use them by name and only reach for
+`<div>` when nothing more specific fits.
+
+## A row of things
+
+Let's start with the classic case: three navigation links that should
+sit side by side. The HTML uses `<nav>` as the container and `<a>` links as the
+children.
+
+<SandpackSnippet folder="flex_layout/row" template="static" activeFile="/index.html" />
+
+> **New tags.** `<nav>` marks a block of navigation links. `<a>`
+> (short for *anchor*) is a clickable link — the `href` attribute
+> says where it goes. We use `href="#"` here as a placeholder because
+> the links don't lead anywhere yet.
+
+The CSS on the *nav container* is only two lines:
+
+```css
+nav {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+```
+
+- `display: flex` tells the browser: lay my children out in a flex-layout.
+- `flex-direction: row` tells the browser to lay out the children in a row. `flex-direction: column` lays them out on top of each other.
+- `gap: 12px` adds space between them (same idea as in grid).
+
+No widths and no columns to declare. Flex just packs the
+children next to each other, each one as wide as it needs to be.
+
+## Pushing things apart
+
+The really useful thing about flex is controlling *how* the children
+are spread out along the row. Two properties do most of the work:
+
+- `justify-content` — how children are spaced **along** the row.
+
+<SandpackSnippet folder="flex_layout/align" template="static" activeFile="/styles.css" />
+
+- `align-items` — how children are aligned **across** the row (top / middle / bottom).
+
+<SandpackSnippet folder="flex_layout/align-column" template="static" activeFile="/styles.css" />
+
+
+These are the most important positional values:
+
+```
+justify-content: start | center | end | space-between | space-around | space-equaly;
+align-items: start | center | end | stretch;
+```
+
+## A real page
+
+Combine those ideas and you get the pattern behind almost every site:
+a `<header>` on top with a logo and nav, a `<main>` in the middle,
+and a `<footer>` at the bottom.
+
+<SandpackSnippet folder="flex_layout/header" template="static" activeFile="/styles.css" />
+
+> **New tags.** `<header>` marks the header section of the page. It often contains a titlebar and a nvaigation menu.`<main>` wraps the primary content of the page —
+> there should only be one per page. `<footer>` is the bottom bar,
+> usually with copyright info or secondary links.
+
+The trick is that flex containers can be *nested*. The outer
+`<header>` is a flex row with the logo and the nav pushed to opposite
+ends. The `<nav>` inside it is *itself* a flex row, laying the links
+out side by side.
+
+```css
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav {
+  display: flex;
+  gap: 16px;
+}
+```
+
+Notice we're styling by *tag name* now (`header`, `nav`) instead of
+by class — because the semantic tags already tell us what each
+element is.
+
+## Flex or grid?
+
+A rough rule of thumb:
+
+- **Grid** when you're building a *2D* layout — a page of cards, a
+  photo gallery, anything where rows *and* columns should line up.
+- **Flex** when you're arranging things along *one* line — a row of
+  buttons, a nav bar, items in a header or footer.
+
+You'll use both, often on the same page. The header of a site is
+usually flex; the grid of cards below it is usually grid.
+
+## Exercise
+
+The snippet below has a `<header>` with a logo and a `<nav>` of three
+links, but they're just stacked on top of each other. Open
+`styles.css` and use flex to turn the header into a row with the
+logo on the left and the nav links on the right, vertically centred.
+There is also a bunch of cat images. Lay these out in a 3x3 grid layout 
+as learned in the previous lesson.
+
+<SandpackSnippet folder="flex_layout/exercise" template="static" activeFile="/styles.css" />

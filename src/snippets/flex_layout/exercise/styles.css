@@ -1,0 +1,58 @@
+/*
+  Exercise: 
+  
+  1. Turn the <header> into a flex row so the logo sits on
+  the left and the <nav> links sit on the right, vertically centered using two nested flex layouts
+
+  2. Layout the cats in a 3x3 grid using a grid layout.
+*/
+
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+}
+
+header {
+  background: #f5c518;
+  padding: 16px 24px;
+  /* your flex rules go here */
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+nav {
+  /* make the links sit in a row with some gap */
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  padding: 6px 10px;
+}
+
+main {
+  padding: 20px 24px;
+}
+
+.gallery-layout {
+  /* make the cats layout in a 3x3 grid  */
+}
+
+.cat {
+  min-height: 50px;
+  min-width: 50px;
+  margin: 5px;
+  background: url("https://placekittens.com/300/300");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  aspect-ratio: 1;
+}
+
+footer {
+  background: #333;
+  color: white;
+  padding: 16px 24px;
+}

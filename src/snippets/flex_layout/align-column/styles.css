@@ -1,0 +1,39 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 10px;
+}
+
+p {
+  margin: 10px 0 5px 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.flex {
+  display: flex;
+  padding: 5px 10px;
+  gap: 10px;
+  background: #aaaaaa;
+  height: 50px;
+}
+
+.stretch {
+  align-items: stretch;
+}
+
+.start {
+  align-items: start;
+}
+
+.center {
+  align-items: center;
+}
+
+.end {
+  align-items: end;
+}
+
+.item {
+  background: #f5c518;
+  padding: 5px 10px;
+}

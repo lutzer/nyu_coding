@@ -1,0 +1,40 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f5c518;
+  padding: 16px 24px;
+  border: 1px dashed black;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+nav {
+  display: flex;
+  gap: 16px;
+  border: 1px dashed black;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  padding: 6px 10px;
+}
+
+main {
+  padding: 20px 24px;
+}
+
+footer {
+  background: #333;
+  color: white;
+  padding: 16px 24px;
+}
