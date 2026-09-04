@@ -15,7 +15,7 @@ Headings give your page a structure, like chapters and sections in a book.
 There are six levels, from `<h1>` (most important) down to `<h6>` (least
 important).
 
-```
+```html
 <h1>Page title</h1>
 <h2>Section title</h2>
 <h3>Sub-section</h3>
@@ -29,7 +29,7 @@ A page should usually have exactly **one** `<h1>`, and then use `<h2>`,
 Regular blocks of text go inside `<p>` (paragraph) tags. The browser
 automatically adds a little space above and below each paragraph.
 
-```
+```html
 <p>This is a paragraph of text.</p>
 <p>This is a second, separate paragraph.</p>
 ```
@@ -41,7 +41,7 @@ Inside a paragraph you can highlight words with:
 - `<strong>` — important text, usually rendered **bold**.
 - `<em>` — emphasised text, usually rendered *italic*.
 
-```
+```html
 <p>Please do <strong>not</strong> press the <em>red</em> button.</p>
 ```
 
@@ -50,7 +50,7 @@ Inside a paragraph you can highlight words with:
 The `<a>` tag ("anchor") turns text into a clickable link. The `href`
 attribute says *where* the link goes.
 
-```
+```html
 <a href="https://example.com">Visit example.com</a>
 ```
 
@@ -66,7 +66,7 @@ own. Two attributes matter:
 - `alt` — a short text description, shown if the image fails to load and
   read out loud by screen readers.
 
-```
+```html
 <img src="cat.jpg" alt="A sleeping cat" />
 ```
 
@@ -79,7 +79,7 @@ Two kinds of lists show up most often:
 
 Both contain `<li>` (list item) elements.
 
-```
+```html
 <ul>
   <li>Apples</li>
   <li>Oranges</li>
@@ -109,7 +109,7 @@ containers you will style with CSS later.
 - `<span>` is an **inline** container — good for wrapping a few words
   inside a paragraph so you can style them.
 
-```
+```html
 <div>
   <p>Some text with a <span>highlighted word</span> in it.</p>
 </div>

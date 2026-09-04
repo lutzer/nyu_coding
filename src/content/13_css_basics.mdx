@@ -17,7 +17,7 @@ lives in a separate file.
 The most common way — and the one we will use throughout the course — is a
 separate `.css` file linked from the `<head>`:
 
-```
+```html
 <link rel="stylesheet" href="styles.css" />
 ```
 
@@ -29,7 +29,7 @@ own file is what you'll see in real projects.
 
 Every CSS rule has three parts:
 
-```
+```css
 h1 {
   color: purple;
 }
@@ -42,7 +42,7 @@ h1 {
 The property/value pair sits inside `{ ... }` and ends with a **semicolon**.
 A rule can set as many properties as you like:
 
-```
+```css
 h1 {
   color: purple;
   font-size: 32px;
@@ -58,7 +58,7 @@ Three selectors will cover most of what you need at first:
 
 Targets every element of that type.
 
-```
+```css
 p {
   line-height: 1.5;
 }
@@ -69,11 +69,11 @@ p {
 Add a `class` attribute in the HTML, then select it with a leading dot.
 Multiple elements can share the same class.
 
-```
+```css
 <p class="intro">Welcome!</p>
 ```
 
-```
+```css
 .intro {
   font-weight: bold;
 }
@@ -83,11 +83,11 @@ Multiple elements can share the same class.
 
 An `id` is meant to be unique to *one* element. Select it with a leading `#`.
 
-```
+```css
 <p id="callout">Read this bit.</p>
 ```
 
-```
+```css
 #callout {
   background: yellow;
 }

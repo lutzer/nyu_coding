@@ -99,17 +99,11 @@ li {
 
 .content h1 { margin-top: 0; }
 
-.content pre, .content code {
-  background: #e3e3e3;
-  color: #000000;
-}
-
 .content pre {
   padding: var(--spacing-small);
   border-radius: 3px;
   overflow-x: auto;
   border: 1px solid #00000022;
-  /* font-size: 0.95em; */
 }
 
 .content code {
@@ -118,8 +112,22 @@ li {
 }
 
 .content :not(pre) > code {
+  background: #e3e3e3;
+  color: #000000;
   padding: 1px var(--spacing-small);
   border-radius: 3px;
+}
+
+.content pre > code {
+  display: grid;
+}
+
+.content pre > code > [data-line] {
+  padding: 0 var(--spacing-small);
+}
+
+figure {
+  margin:0;
 }
 
 .button-group {
