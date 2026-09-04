@@ -1,0 +1,91 @@
+export const title = "Position";
+export const chapter = "Chapter 1: Web Basics";
+
+# Position
+
+Grid and flex arrange things *in* the flow of the page: each element
+takes its own slot, and the ones after it move out of the way. That's
+almost always what you want — but not always. Sometimes you want an
+element to sit *on top of* the flow: a badge pinned to the corner of
+a card, a header that stays put while you scroll.
+
+For that, CSS has a third layout tool: the `position` property.
+
+## `position: relative` — nudging in place
+
+By default every element has `position: static` — it sits where the
+normal flow puts it, and `top` / `left` / `right` / `bottom` are
+ignored.
+
+`position: relative` keeps the element in the flow (the elements
+around it don't move) but lets you nudge it from where it *would*
+have been.
+
+<SandpackSnippet folder="position/relative" template="static" activeFile="/styles.css" />
+
+```css
+.nudged {
+  position: relative;
+  top: 20px;
+  left: 40px;
+}
+```
+
+Notice box C didn't slide up to fill the gap — B is still "there"
+as far as the layout is concerned. Relative positioning is useful
+for small visual tweaks, but its more important job is to act as a
+*positioning parent* for the next trick.
+
+## `position: absolute` — floating over a parent
+
+An absolutely-positioned element is taken *out of the flow* entirely.
+Its `top` / `left` / `right` / `bottom` values are measured against
+the nearest ancestor that has a `position` of its own (usually
+`relative`).
+
+<SandpackSnippet folder="position/absolute" template="static" activeFile="/styles.css" />
+
+```css
+.parent {
+  position: relative;
+}
+
+.child {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+```
+
+The parent becomes the reference frame; the child is pinned to its
+bottom-right corner. This is the pattern behind badges, captions,
+close buttons, and anything else that overlays another element.
+
+## `position: sticky` — pin while scrolling
+
+`sticky` behaves like `relative` until you scroll past a threshold
+you pick with `top`, and then it behaves like it's glued to the top
+of the window.
+
+<SandpackSnippet folder="position/sticky" template="static" activeFile="/styles.css" />
+
+```css
+header {
+  position: sticky;
+  top: 0;
+}
+```
+
+That's the whole trick behind every site with a header that follows
+you down the page. Scroll the preview to see it lock into place.
+
+## Exercise
+
+The snippet below has a header and a list of cards, each with a
+"NEW" badge that's currently just sitting inside the card as normal
+text. Two things to do in `styles.css`:
+
+1. Make the header stick to the top of the page as you scroll.
+2. Pin each `.badge` to the top-right corner of its `.card`.
+
+<SandpackSnippet folder="position/exercise" template="static" activeFile="/styles.css" />

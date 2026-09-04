@@ -1,0 +1,22 @@
+body {
+  font-family: system-ui, sans-serif;
+  padding: 20px;
+}
+
+.box {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  background: #f5c518;
+  border: 1px dashed;
+}
+
+.caption {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 8px 12px;
+  background: black;
+  color: white;
+  font-weight: 600;
+}

@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+p {
+  margin: 5px 20px;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  background: #f5c518;
+  padding: 16px 24px;
+  font-weight: 600;
+}
+
+main {
+  padding: 20px 24px;
+}
+
+.cat {
+  height: 200px;
+  margin-bottom: 12px;
+  background: url("https://cataas.com/cat?width=600&height=200") center/cover;
+}
