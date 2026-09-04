@@ -1,0 +1,96 @@
+export const title = "Layout with Divs";
+export const chapter = "Chapter 1: Web Basics";
+
+# Layout with Divs
+
+Real web pages aren't just one long column of text. They usually have
+*regions*: a bar at the top (the **header**), the main **content** in
+the middle, and a **footer** at the bottom. Inside the content area,
+things are often arranged in rows and columns.
+
+In this lesson we'll build that shape step by step, using plain `<div>`
+elements as our building blocks.
+
+## Divs are just boxes
+
+A `<div>` on its own is invisible — it's an empty container. But as soon
+as we give it a background colour and some padding, we can see it. Let's
+stack three of them:
+
+<SandpackSnippet folder="html_layout/boxes" template="static" activeFile="/index.html" />
+
+The HTML is just three sibling divs, each with a different `class`:
+
+```html
+<div class="header">Header</div>
+<div class="content">Content</div>
+<div class="footer">Footer</div>
+```
+
+The CSS gives each one a background and some padding so we can *see*
+where they are:
+
+```css
+.header  { background: #f5c518; padding: 20px; }
+.content { background: #eeeeee; padding: 40px 20px; }
+.footer  { background: #333;    color: white; padding: 20px; }
+```
+
+Divs stack from top to bottom by default. That already gives us the
+outer skeleton of a page.
+
+> **A note on semantic tags.** HTML also has `<header>`, `<main>`, and
+> `<footer>` elements that do the same job as these divs but describe
+> their *meaning*. We'll stick with divs for now to keep the focus on
+> layout — you can swap them in later once the layout idea is clear.
+
+## Arranging things in columns
+
+Stacking is fine for the outer shape, but inside the content area we
+often want *columns* — a row of cards, for example. CSS has a tool made
+exactly for this called **grid**.
+
+<SandpackSnippet folder="html_layout/grid" template="static" activeFile="/styles.css" />
+
+The HTML is a container div with two child divs inside:
+
+```html
+<div class="cards">
+  <div class="card">Card 1</div>
+  <div class="card">Card 2</div>
+</div>
+```
+
+The magic is in three CSS lines on the *container*:
+
+```css
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+```
+
+- `display: grid` tells the browser: arrange my children in a grid.
+- `grid-template-columns: 1fr 1fr` says: two columns, each taking one
+  fraction (`1fr`) of the available space — so they share it equally.
+- `gap: 16px` adds space between the cells.
+
+Want three columns instead? Change it to `1fr 1fr 1fr`. Four? Add
+another `1fr`.
+
+## Putting it together
+
+The trick is that these two ideas *combine*: the header/content/footer
+divs give you the outer shape, and a grid *inside* the content div
+arranges things in columns. That's the pattern behind most simple web
+pages.
+
+## Exercise
+
+The snippet below already has the outer layout (header, content,
+footer) and three cards inside the content area — but the cards are
+still stacked. Your job is to open `styles.css` and turn the content
+area into a **3-column grid**.
+
+<SandpackSnippet folder="html_layout/exercise" template="static" activeFile="/styles.css" />
