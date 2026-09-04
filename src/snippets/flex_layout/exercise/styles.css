@@ -2,7 +2,12 @@
   Exercise: 
   
   1. Turn the <header> into a flex row so the logo sits on
-  the left and the <nav> links sit on the right, vertically centered using two nested flex layouts
+  the left and the <nav> links sit on the right, 
+  vertically centered using two nested flex layouts
+    -> add flex layout to outer container and change 
+       the justify content property
+    -> add a flex layout to the inner container
+       and add a gap
 
   2. Layout the cats in a 3x3 grid using a grid layout.
 */
@@ -29,8 +34,10 @@ nav {
 
 nav a {
   text-decoration: none;
-  color: black;
+  color: #f5c518;
   padding: 6px 10px;
+  border-radius: 20px;
+  background: #000000bb;
 }
 
 main {
