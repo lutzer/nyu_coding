@@ -68,7 +68,7 @@ function PersistenceBridge({ folder, pristineFiles }) {
 export function SandpackSnippet({
   folder,
   template = "react",
-  fullscreen = false,
+  size = 'small',
   activeFile,
   options,
   customSetup,
@@ -94,7 +94,8 @@ export function SandpackSnippet({
     );
   }
 
-  const editorHeight = fullscreen ? "90vh" : options?.editorHeight || 360;
+  const editorHeight = size == 'large' ? 500 : size == 'fullscreen' ? "90vh" : 360;
+  console.log(editorHeight)
   const config = { template, customSetup };
 
   return (
