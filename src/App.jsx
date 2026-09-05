@@ -1,11 +1,11 @@
 import { Route, Routes, Navigate, useLocation, useNavigate } from "react-router-dom";
 import FullscreenPreview from "./components/FullscreenPreview";
 
-const pageModules = import.meta.glob("./content/*.mdx", { eager: true });
+const pageModules = import.meta.glob("../content/lessons/*.mdx", { eager: true });
 
 const pages = Object.entries(pageModules)
   .map(([path, mod]) => {
-    const slug = path.replace("./content/", "").replace(/\.mdx$/, "");
+    const slug = path.replace("../content/lessons/", "").replace(/\.mdx$/, "");
     return {
       slug,
       title: mod.title ?? slug.replace(/[-_]/g, " "),

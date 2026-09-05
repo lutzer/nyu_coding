@@ -1,4 +1,4 @@
-const rawSnippets = import.meta.glob("../snippets/**/*", {
+const rawSnippets = import.meta.glob("../../content/snippets/**/*", {
   query: "?raw",
   import: "default",
   eager: true,
@@ -9,7 +9,7 @@ export function snippetStorageKey(folder) {
 }
 
 export function loadSnippetFiles(folder) {
-  const prefix = `../snippets/${folder}/`;
+  const prefix = `../../content/snippets/${folder}/`;
   const files = {};
   for (const [path, content] of Object.entries(rawSnippets)) {
     if (!path.startsWith(prefix)) continue;
