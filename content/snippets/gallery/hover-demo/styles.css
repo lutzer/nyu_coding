@@ -1,0 +1,17 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 40px;
+}
+
+.box {
+  width: 200px;
+  padding: 40px;
+  background: #ddd;
+  color: #111;
+  text-align: center;
+}
+
+.box:hover {
+  background: #111;
+  color: white;
+}

@@ -1,0 +1,108 @@
+export const title = "Building the gallery";
+export const chapter = "Chapter 1: Web Basics";
+
+# Hover & Transitions
+
+So far every style you've written applies *all the time*. But a page
+often needs styles that only kick in when the user is interacting with
+an element — the classic case is a link or a card that reacts when the
+mouse is over it.
+
+## `:hover`
+
+`:hover` is a **pseudo-class** — a selector that only matches when the
+user's cursor is over the element. Nothing about the HTML changes;
+CSS just applies extra rules for that state.
+
+<SandpackSnippet folder="gallery/hover-demo" template="static" activeFile="/styles.css" />
+
+```css
+.box {
+  background: #ddd;
+}
+
+.box:hover {
+  background: #111;
+  color: white;
+}
+```
+
+Move your mouse over the box in the preview. When it leaves, the
+styles snap back.
+
+You can attach `:hover` to almost any selector: `a:hover`,
+`button:hover`, `.card:hover`, `nav a:hover`, and so on.
+
+## `transition`
+
+By default hover changes are *instant* — the styles snap on and off.
+`transition` tells the browser to animate the change over a short
+duration instead.
+
+<SandpackSnippet folder="gallery/transition-demo" template="static" activeFile="/styles.css" />
+
+```css
+.box {
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+
+.box:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+```
+
+Two things to notice about `transition`:
+
+- It goes on the **base** rule, not on `:hover`. It describes how the
+  property should change *whenever* it changes — both on the way in
+  and on the way out.
+- The value is a list: which property to animate, how long, and an
+  easing curve (`ease` is a good default).
+
+### `transform: scale(...)`
+
+`transform` is a property that lets you *visually* move, rotate, or
+resize an element without changing its place in the layout. `scale(1.1)`
+draws the element at 110% of its normal size; `scale(1)` is the
+default. Because the surrounding layout doesn't shift, `scale` is a
+safe thing to animate on hover.
+
+### `box-shadow`
+
+`box-shadow` paints a soft shadow around an element. The four values
+are:
+
+```css
+box-shadow: 0 10px 30px #00000033;
+```
+
+- **x / y** — how far the shadow is offset from the element. `0 10px`
+  puts it directly below.
+- **blur** — how soft the edges are. Bigger blur = softer, more
+  diffuse shadow.
+- **colour** — usually a translucent black (`#00000033` means
+  black at 20% opacity), so the shadow tints whatever is behind it
+  instead of covering it.
+
+Together, a slight scale + a soft shadow gives the impression that the
+element *lifted off the page* — the standard "this is interactive"
+cue.
+
+## Exercise
+
+Time to put the top of the gallery site together. The snippet below
+already has the HTML — a header, a hero, a row of filter buttons, and
+nine artwork cards — but almost no CSS. Open `styles.css` and, using
+everything from the previous lessons plus what you just learned:
+
+1. **Layout** — lay out the header (flex), the hero, the filter row
+   (flex), and the grid of cards (grid, three columns).
+2. **Hero image** add some background image to the hero area with `background: url()`
+3. **Hover** — darken the nav links, give the filter buttons a
+   light-grey background and a pointer cursor, and make the cards
+   scale up slightly with a soft shadow.
+4. **Transitions** — add a `transition` on the cards so the hover
+   change animates smoothly instead of snapping.
+
+<SandpackSnippet folder="gallery/exercise" size="large" template="static" activeFile="/styles.css" />

@@ -1,0 +1,95 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  color: #111;
+}
+
+/* -----------------------------------------------------------
+   1. HEADER
+   Put the logo on the left and the nav links on the right,
+   vertically centred. (flex — lesson 15)
+----------------------------------------------------------- */
+
+header {
+  padding: 20px 32px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #444;
+  margin-right: 16px;
+}
+
+/* TODO: on hover, darken the nav links. */
+
+
+/* -----------------------------------------------------------
+   2. HERO
+   Give it generous padding, a soft background,
+   and centre the text.
+----------------------------------------------------------- */
+
+.hero {
+  /* your styles here */
+}
+
+
+/* -----------------------------------------------------------
+   3. FILTER BUTTONS
+   Lay them out in a row with a small gap. (flex)
+----------------------------------------------------------- */
+
+.filters {
+  padding: 24px 32px 0;
+}
+
+button {
+  padding: 8px 16px;
+  font-size: 14px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 999px;
+}
+
+/* TODO: on hover, give the button a light-grey background
+   and turn the cursor into a pointer. */
+
+
+/* -----------------------------------------------------------
+   4. GRID
+   Arrange the cards in three equal columns. (grid — lesson 14)
+----------------------------------------------------------- */
+
+main {
+  padding: 24px 32px 48px;
+}
+
+.grid {
+  /* your styles here */
+}
+
+.card {
+  margin: 0;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card figcaption {
+  padding: 8px 4px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* TODO: on hover, scale the card up slightly (transform: scale(...))
+   and lift a soft box-shadow. Use `transition` on `.card` so the
+   change animates smoothly instead of snapping. */
