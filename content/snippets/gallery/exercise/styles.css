@@ -1,7 +1,6 @@
 body {
   font-family: system-ui, sans-serif;
   margin: 0;
-  color: #111;
 }
 
 /* -----------------------------------------------------------
@@ -11,19 +10,19 @@ body {
 ----------------------------------------------------------- */
 
 header {
-  padding: 20px 32px;
+  padding: 20px;
   border-bottom: 1px solid #e5e5e5;
 }
 
 .logo {
-  font-weight: 700;
-  font-size: 18px;
+  height: 32px;
+  display: block;
 }
 
 nav a {
   text-decoration: none;
   color: #444;
-  margin-right: 16px;
+  margin-right: 10px;
 }
 
 /* TODO: on hover, darken the nav links. */
@@ -46,7 +45,7 @@ nav a {
 ----------------------------------------------------------- */
 
 .filters {
-  padding: 24px 32px 0;
+  padding: 24px;
 }
 
 button {
@@ -54,7 +53,7 @@ button {
   font-size: 14px;
   background: white;
   border: 1px solid #ccc;
-  border-radius: 999px;
+  border-radius: 20px;
 }
 
 /* TODO: on hover, give the button a light-grey background
@@ -67,7 +66,7 @@ button {
 ----------------------------------------------------------- */
 
 main {
-  padding: 24px 32px 48px;
+  padding: 24px;
 }
 
 .grid {
@@ -85,10 +84,14 @@ main {
 }
 
 .card figcaption {
-  padding: 8px 4px 0;
   font-size: 14px;
-  color: #555;
 }
+
+/* TODO: pin the caption over the bottom-left corner of the image.
+   Give `.card` `position: relative` and `.card figcaption`
+   `position: absolute` with `left: 0` and `bottom: 0`.
+   (positioning — lesson 16) */
+
 
 /* TODO: on hover, scale the card up slightly (transform: scale(...))
    and lift a soft box-shadow. Use `transition` on `.card` so the

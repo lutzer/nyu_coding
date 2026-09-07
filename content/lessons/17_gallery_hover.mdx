@@ -1,7 +1,9 @@
 export const title = "Building the gallery";
 export const chapter = "Chapter 1: Web Basics";
 
-# Hover & Transitions
+# Building the Gallery
+
+## Hover & Transitions
 
 So far every style you've written applies *all the time*. But a page
 often needs styles that only kick in when the user is interacting with
@@ -16,17 +18,6 @@ CSS just applies extra rules for that state.
 
 <SandpackSnippet folder="gallery/hover-demo" template="static" activeFile="/styles.css" />
 
-```css
-.box {
-  background: #ddd;
-}
-
-.box:hover {
-  background: #111;
-  color: white;
-}
-```
-
 Move your mouse over the box in the preview. When it leaves, the
 styles snap back.
 
@@ -40,17 +31,6 @@ By default hover changes are *instant* — the styles snap on and off.
 duration instead.
 
 <SandpackSnippet folder="gallery/transition-demo" template="static" activeFile="/styles.css" />
-
-```css
-.box {
-  transition: transform 250ms ease, box-shadow 250ms ease;
-}
-
-.box:hover {
-  transform: scale(1.1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-```
 
 Two things to notice about `transition`:
 
@@ -74,7 +54,7 @@ safe thing to animate on hover.
 are:
 
 ```css
-box-shadow: 0 10px 30px #00000033;
+box-shadow: 0 10px 30px #00000033; /* x y blur colour */
 ```
 
 - **x / y** — how far the shadow is offset from the element. `0 10px`
@@ -91,18 +71,30 @@ cue.
 
 ## Exercise
 
-Time to put the top of the gallery site together. The snippet below
-already has the HTML — a header, a hero, a row of filter buttons, and
-nine artwork cards — but almost no CSS. Open `styles.css` and, using
-everything from the previous lessons plus what you just learned:
+The snippet below already has the HTML — a header, a hero, a row of
+filter buttons, and nine artwork cards — but almost no CSS. Open
+`styles.css` and, using everything from the previous lessons plus what
+you just learned:
+
+Here's roughly what you're aiming for:
+
+<pre style={{ background: "white", textAlign: "center"}}><img src={`${import.meta.env.BASE_URL}lesson-images/17_gallery_preview.png`} style={{ height: "300px", aspectRatio: "1" }} /></pre>
 
 1. **Layout** — lay out the header (flex), the hero, the filter row
    (flex), and the grid of cards (grid, three columns).
-2. **Hero image** add some background image to the hero area with `background: url()`
-3. **Hover** — darken the nav links, give the filter buttons a
+2. **Hero image** — add a background image to the hero area with
+   `background: url()`.
+3. **Caption overlay** — pin each caption over the bottom-left corner
+   of its image. Give the card `position: relative` and the caption
+   `position: absolute` with `left: 0` and `bottom: 0`.
+   (positioning — lesson 16)
+4. **Hover** — darken the nav links, give the filter buttons a
    light-grey background and a pointer cursor, and make the cards
    scale up slightly with a soft shadow.
-4. **Transitions** — add a `transition` on the cards so the hover
+5. **Transitions** — add a `transition` on the cards so the hover
    change animates smoothly instead of snapping.
+
+
+
 
 <SandpackSnippet folder="gallery/exercise" size="large" template="static" activeFile="/styles.css" />
