@@ -109,6 +109,7 @@ A small handful of properties will get you a surprisingly long way:
 - `padding` — space *inside* an element, between its content and its edge.
 - `margin` — space *outside* an element, between it and its neighbours.
 - `border` — a line around the element, e.g. `1px solid black`.
+- `width` and `height` - defines the size of the element. If not set, it resizes automatically.
 
 ## Colours
 
@@ -122,6 +123,13 @@ Named colours are handy for quick experiments; hex codes are what you'll
 see most often in real designs.
 
 Check out this [Color Picker](https://htmlcolorcodes.com/color-picker/) to generate hex codes for colors.
+
+## Dimensions
+
+- elements like padding, margin, width and height use dimensions. 
+The most important ones are `px` (Pixels), `%` (Percent of parent element) and `vw/vh` (Percent of viewport width/height)
+
+<SandpackSnippet folder="css_basics/dimensions" template="static" activeFile="/styles.css" />
 
 ## The "cascading" part
 
@@ -141,5 +149,7 @@ Open the snippet below. The HTML is a little gallery page for Edward
 Hopper's *Nighthawks* — a title, an intro line, the painting itself, a
 caption, and a few facts about it. Your job is to fill in `styles.css`
 so it actually looks like a gallery page.
+
+> A Note about **CSS comments**: whatever is wrapped in between `/* comment */` will not be interpreted by the browser.
 
 <SandpackSnippet folder="css_basics/exercise" size="large" template="static" activeFile="/styles.css" />

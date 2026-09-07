@@ -4,7 +4,7 @@
   1. Give the <img> a max-width so it doesn't overflow, and try
      adding a border or some padding around it like a frame.
      Hint: img { max-width: 100%; }
-  2. Give the <body> a background colour that suits the painting
+  2. Give the <body> or .artwork a background colour that suits the painting
   3. Give the <h1> — the painting's title — a colour and font-size
      that make it feel like a title.
   4. Make the paragraph with class "intro" italic.
