@@ -52,9 +52,7 @@ main {
   min-height: 50px;
   min-width: 50px;
   margin: 5px;
-  background: url("https://placekittens.com/300/300");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+  background-size: cover;
   aspect-ratio: 1;
 }
 

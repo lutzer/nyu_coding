@@ -27,12 +27,11 @@ main {
 .card {
   height: 200px;
   margin-bottom: 12px;
-  background: url("https://cataas.com/cat?width=600&height=200") center/cover;
+  background-size: cover;
   /* make this a positioning parent for the badge */
 }
 
 .badge {
-  display: inline-block;
   padding: 4px 8px;
   background: black;
   color: white;
