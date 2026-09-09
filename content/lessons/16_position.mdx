@@ -61,26 +61,33 @@ The parent becomes the reference frame; the child is pinned to its
 bottom-right corner. This is the pattern behind badges, captions,
 close buttons, and anything else that overlays another element.
 
-## `position: sticky` — pin while scrolling
+## `position: fixed` — pin to the screen
 
-`sticky` behaves like `relative` until you scroll past a threshold
-you pick with `top`, and then it behaves like it's glued to the top
-of the window.
+`fixed` takes an element out of the flow, just like `absolute`, but
+its `top` / `left` / `right` / `bottom` values are measured against
+the *viewport* — the browser window itself — instead of a parent.
 
-<SandpackSnippet folder="position/sticky" template="static" activeFile="/styles.css" />
+That means the element stays glued to the screen: as you scroll, the
+rest of the page moves underneath it, but the fixed element doesn't
+budge.
+
+<SandpackSnippet folder="position/fixed" template="static" activeFile="/styles.css" />
 
 ```css
 header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
 }
 ```
 
-That's the whole trick behind every site with a header that follows
-you down the page. Scroll the preview to see it lock into place.
+That's the whole trick behind every site with a header that stays on
+screen while you scroll. Scroll the preview and watch the header
+stay put.
 
 ## Exercise
 
-Edit the `styles.css` to make the header sticky and pin each badge to the bottom right corner of its card.
+Edit the `styles.css` to fix the header to the top of the screen and pin each badge to the bottom right corner of its card.
 
 <SandpackSnippet folder="position/exercise" template="static" activeFile="/styles.css" />
