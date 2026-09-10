@@ -83,7 +83,7 @@ main {
   display: block;
 }
 
-.card figcaption {
+.card .caption {
   font-size: 14px;
 }
 
