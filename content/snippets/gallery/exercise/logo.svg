@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 40" role="img" aria-label="Gallery">
-  <rect x="0" y="4" width="26" height="26" fill="#cfcfcf"/>
-  <rect x="10" y="12" width="26" height="26" fill="#111"/>
+  <rect x="0" y="4" width="26" height="26" fill="#DF301C"/>
+  <rect x="10" y="12" width="26" height="26" fill="#FF9100"/>
   <text x="50" y="30" font-family="Georgia, 'Times New Roman', serif" font-size="22" fill="#111" letter-spacing="0.5">Gallery</text>
 </svg>

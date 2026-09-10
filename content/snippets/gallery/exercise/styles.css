@@ -48,16 +48,16 @@ nav a {
   padding: 24px;
 }
 
-button {
-  padding: 8px 16px;
+.filter-button {
+  width: 33%;
   font-size: 14px;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 20px;
+  background: #eee;
+  border: 0;
+  padding: 20px;
+  text-align: center;
 }
 
-/* TODO: on hover, give the button a light-grey background
-   and turn the cursor into a pointer. */
+/* TODO: on hover, give the buttons a different styling. */
 
 
 /* -----------------------------------------------------------
