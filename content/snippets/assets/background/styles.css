@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+.hero {
+  height: 300px;
+  background-image: url("https://picsum.photos/id/1015/800/400");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero h1 {
+  color: white;
+  font-size: 3rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}

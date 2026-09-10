@@ -1,0 +1,18 @@
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* TODO 3: once the Pacifico <link> is in place,
+   set the h1 to use "Pacifico" as its font-family. */
+h1 {
+  font-size: 2.5rem;
+}
+
+img {
+  display: block;
+  width: 100%;
+  margin: 1rem 0;
+}

@@ -1,0 +1,111 @@
+export const title = "Assets";
+export const chapter = "Chapter 1: Web Basics";
+
+# Assets
+
+An **asset** is any file your page pulls in from somewhere else: an
+image, a font, a sound, a video. Your HTML and CSS just point at these
+files — the browser goes and fetches them.
+
+<SandpackSnippet folder="assets/overview" size="large" template="static" activeFile="/index.html" />
+
+## Local vs. remote paths
+
+Every asset lives *somewhere*. There are two ways to point at it:
+
+- **Remote** — a full URL that starts with `https://`. The browser
+  downloads the file from another server.
+
+  ```html
+  <img src="https://picsum.photos/400/250" alt="A random photo" />
+  ```
+
+- **Local** — a path to a file sitting next to your HTML. No `https://`,
+  just the file name (or a folder + file name).
+
+  ```html
+  <img src="cat.jpg" alt="A cat" />
+  <img src="images/cat.jpg" alt="A cat in a subfolder" />
+  ```
+
+In the snippet below, open the file tree on the left — you'll see
+`logo.svg` sitting next to `index.html`. That's what "local" means: the
+browser looks for the file right there.
+
+<SandpackSnippet folder="assets/local_path" template="static" activeFile="/index.html" />
+
+That's the whole idea. Everything below is just this same choice, applied
+to different types of files.
+
+## Images
+
+You already know `<img>` from the HTML chapter:
+
+```html
+<img src="cat.jpg" alt="A sleeping cat" />
+<img src="https://picsum.photos/300/200" alt="A random photo" />
+```
+
+In CSS, images show up as backgrounds via `url(...)`:
+
+```css
+body {
+  background: url("bg.jpg");           /* local */
+  background: url("https://.../bg.jpg"); /* remote */
+}
+```
+
+<SandpackSnippet folder="assets/background" template="static" activeFile="/styles.css" />
+
+## Fonts
+
+Two common ways to bring in a custom font.
+
+**Remote — Google Fonts.** Grab a `<link>` from
+[fonts.google.com](https://fonts.google.com) and paste it into your `<head>`,
+then use the font by name in CSS:
+
+```html
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter&display=swap" />
+```
+
+```css
+body {
+  font-family: "Inter", sans-serif;
+}
+```
+
+**Local — `@font-face`.** Drop a font file (usually `.woff2`) next to your
+page and register it yourself:
+
+```css
+@font-face {
+  font-family: "MyFont";
+  src: url("fonts/MyFont.woff2");
+}
+
+body {
+  font-family: "MyFont", sans-serif;
+}
+```
+
+## Videos
+
+`<video>` works the same way:
+
+```html
+<video src="clip.mp4" controls width="400"></video>
+<video src="https://example.com/clip.mp4" controls width="400"></video>
+```
+
+## Exercise
+
+Open the snippet below. Two things to do:
+
+1. Link the Google Font **Pacifico** in the `<head>` and use it for the
+   `<h1>` in `styles.css`.
+2. Add an `<img>` that shows the **local** file `artwork.svg` (it's
+   already in the snippet folder — check the file tree on the left).
+
+<SandpackSnippet folder="assets/exercise" size="large" template="static" activeFile="/index.html" />
