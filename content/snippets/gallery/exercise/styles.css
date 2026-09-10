@@ -87,10 +87,7 @@ main {
   font-size: 14px;
 }
 
-/* TODO: pin the caption over the bottom-left corner of the image.
-   Give `.card` `position: relative` and `.card figcaption`
-   `position: absolute` with `left: 0` and `bottom: 0`.
-   (positioning — lesson 16) */
+/* TODO: pin the caption over the bottom-left corner of the image. by using absolute positioning */
 
 
 /* TODO: on hover, scale the card up slightly (transform: scale(...))
