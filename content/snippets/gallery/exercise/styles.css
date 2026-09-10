@@ -3,6 +3,9 @@ body {
   margin: 0;
 }
 
+/* TODO: give the body the "Inter" Google Font. The <link> is already in
+   index.html */
+
 /* -----------------------------------------------------------
    1. HEADER
    Put the logo on the left and the nav links on the right,
@@ -35,8 +38,12 @@ nav a {
 ----------------------------------------------------------- */
 
 .hero {
+  text-align: center;
   /* your styles here */
 }
+
+/* TODO: give the h1 the "Playfair Display" Font. The <link> is already in
+   index.html */
 
 
 /* -----------------------------------------------------------
