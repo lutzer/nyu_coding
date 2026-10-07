@@ -1,0 +1,148 @@
+export const title = "Imports & Exports";
+export const chapter = "Chapter 2: Interactivity & React";
+
+# Imports & Exports
+
+In the previous lesson you saw that a React app is split across
+several files — `App.js`, `index.js`, `styles.css`. Here's the same
+sandbox again so you can flip between them while we read through:
+
+<SandpackSnippet folder="react_intro/hello" size="large" template="react" activeFile="/App.js" />
+
+## `App.js` — your component
+
+```jsx
+export default function App() {
+  return (
+    <div>
+      <h1>Hello from React!</h1>
+      <p>This paragraph is rendered by a React component.</p>
+    </div>
+  );
+}
+```
+
+A component is a **function whose name starts with a capital letter**
+and that **returns JSX**. That's really it. The function above returns
+a `<div>` containing an `<h1>` and a `<p>` — tags that look exactly
+like the HTML tags from Chapter 1.
+
+A few rules about JSX that will trip you up at first:
+
+- A component must return **one** element. If you want several
+  siblings, wrap them in a parent `<div>` (or an empty wrapper
+  `<>...</>`).
+- Every tag must be **closed**. Self-closing tags end with ` />`:
+  `<img src="..." />`, `<br />`, `<hr />`.
+- JSX comments go inside braces: `{/* like this */}`.
+- The `class` attribute from HTML becomes `className` in JSX (because
+  `class` is a reserved word in JavaScript).
+
+The `export default` at the front of the function is what makes `App`
+available to other files — which brings us to the rest of this
+lesson.
+
+## Imports and exports
+
+Each file in a React app is its own little world: variables and
+functions you declare in one file are *not* visible in another unless
+you deliberately share them.
+
+**`export`** makes something available to other files. **`import`**
+pulls it in. Together they are how JavaScript files talk to each
+other.
+
+## Default exports
+
+A file can `export default` one main thing — usually its most
+important function or component. The importer picks whatever name
+they like for it.
+
+```js
+// in App.js
+export default function App() { ... }
+```
+
+```js
+// in index.js
+import App from "./App";
+```
+
+Notice the path `"./App"`: the leading `./` means "a file next to
+this one". No file extension needed — the bundler figures that out.
+
+## Named exports
+
+A file can also export several named things. The importer has to use
+the exact same names, inside curly braces:
+
+```js
+// in react-dom/client (a library)
+export function createRoot(...) { ... }
+```
+
+```js
+// in index.js
+import { createRoot } from "react-dom/client";
+```
+
+The import above has **no** `./` in front — that tells the bundler
+"this isn't one of my own files, look in the installed packages
+(`node_modules`)". That's how we pull in React itself.
+
+## Side-effect imports
+
+Sometimes you import a file not for a value but just to *run* it. The
+most common case is CSS:
+
+```js
+import "./styles.css";
+```
+
+This doesn't give you a variable — it tells the bundler "include
+this stylesheet with the app". Any CSS rules in that file now apply
+to the whole page.
+
+## `index.js` — the entry point
+
+With imports in mind, open `index.js` in the sandbox. It's the small
+bridge between the HTML page and your components — and now you can
+read it top to bottom like a short recipe:
+
+```js
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import "./styles.css";
+
+const root = createRoot(document.getElementById("root"));
+root.render(<App />);
+```
+
+1. Pull `createRoot` from the React library (a *named* import).
+2. Pull our own `App` component from the file next door (a *default*
+   import).
+3. Attach the stylesheet (a *side-effect* import).
+4. Find the empty `<div id="root">` inside `public/index.html` and
+   create a React *root* attached to it.
+5. Render our `App` component into that root.
+
+You will almost never change this file — but it's what actually puts
+your component on the page.
+
+## Exercise
+
+The `App` component below is empty — it returns `null`, so the page
+renders nothing. Replace `return null;` with a `return ( ... )` that
+returns a `<div>` containing:
+
+1. An `<h1>` headline (whatever title you like).
+2. An `<img>` tag with `src="https://picsum.photos/300"`, nested
+   *inside* the same `<div>` as the headline.
+
+Remember:
+
+- A component must return **one** parent element — put both the
+  headline and the image inside the same `<div>`.
+- The `<img>` tag must be **self-closed**: `<img src="..." />`.
+
+<SandpackSnippet folder="react_intro/exercise" size="large" template="react" activeFile="/App.js" />
