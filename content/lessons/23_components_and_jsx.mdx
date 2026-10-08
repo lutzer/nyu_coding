@@ -121,6 +121,25 @@ export default function App() {   // define a function named `App`
 That's a complete React component. It's a function. It returns
 JSX. React runs the function and puts the result on the page.
 
-In the next lesson we'll zoom out to the two words we skipped —
-`export default` — and look at how `App.js` connects to the rest
-of the project. Then you'll write your own JSX in a short exercise.
+## Exercise
+
+Time to write some JSX of your own. The `App` component below is
+empty — it returns `null`, so the page renders nothing. Replace
+`return null;` with a `return ( ... )` that hands back a `<div>`
+containing:
+
+1. An `<h1>` headline (whatever title you like).
+2. An `<img>` tag with `src="https://picsum.photos/300"`, nested
+   *inside* the same `<div>` as the headline.
+
+Remember:
+
+- A component must return **one** parent element — put both the
+  headline and the image inside the same `<div>`.
+- The `<img>` tag must be **self-closed**: `<img src="..." />`.
+
+<SandpackSnippet folder="react_intro/exercise" size="large" template="react" activeFile="/App.js" />
+
+In the next lesson we'll zoom out to the two words we skipped at
+the top of `App.js` — `export default` — and look at how `App.js`
+connects to the rest of the project.
