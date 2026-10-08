@@ -4,13 +4,13 @@ export const chapter = "Chapter 2: Interactivity & React";
 # React Introduction
 
 In Chapter 1 you wrote plain HTML and CSS. The browser read your
-`index.html` top to bottom and painted exactly what was there — nothing
-on the page could change after it loaded.
+`index.html` top to bottom and painted exactly what was there —
+nothing on the page could change after it loaded.
 
 From here on we want pages that can *change*: buttons that react to
-clicks, a gallery that filters when you pick a tag, data loaded from a
-file. That's what **JavaScript** is for, and **React** is a library
-that makes building that kind of interactive page much easier.
+clicks, a gallery that filters when you pick a tag, data loaded from
+a file. That's what **JavaScript** is for, and **React** is a tool
+that makes building interactive pages much easier.
 
 ## What React actually is
 
@@ -19,10 +19,10 @@ small, reusable pieces called **components**. A component is a named
 chunk of UI that you can drop into your page the same way you'd drop
 in an `<img>` or a `<div>`.
 
-Instead of writing one long `index.html`, you describe your page as a
-tree of components — a `<Gallery>` containing many `<Card>`s, each one
-containing an `<img>` and a `<Caption>`. React takes that tree and
-turns it into real HTML in the browser for you.
+Instead of writing one long `index.html`, you describe your page as
+a tree of components — a `<Gallery>` containing many `<Card>`s, each
+one containing an `<img>` and a `<Caption>`. React takes that tree
+and turns it into real HTML in the browser for you.
 
 Three words worth keeping in mind as we go:
 
@@ -30,30 +30,20 @@ Three words worth keeping in mind as we go:
 - **JSX** — a way to write HTML-looking tags *inside* a JavaScript
   file. It's not actually HTML; the browser never sees JSX directly —
   React turns it into real HTML elements.
-- **Rendering** — React takes your components and *renders* them into
-  the real DOM (the live HTML tree in the browser).
+- **Rendering** — React takes your components and *renders* them
+  into the real DOM (the live HTML tree in the browser).
 
-## The file structure of a React app
-
-Up to now every snippet had a single `index.html`. A React app has a
-few more files, each with a clear job:
-
-- **`public/index.html`** — a nearly-empty HTML page. It only contains
-  an empty `<div id="root"></div>` where React will mount everything.
-  You rarely touch this file.
-- **`index.js`** — the entry point. It tells React to render your
-  top-level component into that `root` div.
-- **`App.js`** — your top-level component. This is where you spend
-  most of your time.
-- **`styles.css`** — a regular CSS file, exactly the same CSS you
-  already know.
-
-The editor below is now running the **React** template — notice the
-file tabs on the left. Click through `App.js`, `index.js`,
-`public/index.html`, and `styles.css` to see each one.
+Here's a tiny React app. Don't worry about the code yet — just open
+`App.js`, `index.js`, `public/index.html`, and `styles.css` in the
+tabs and get a feel for how a React project is laid out.
 
 <SandpackSnippet folder="react_intro/hello" size="large" template="react" activeFile="/App.js" />
 
-In the next lesson we'll open `App.js` and `index.js` and read them
-line by line — starting from the very basics of what a JavaScript
-file actually *is*.
+## What's coming next
+
+React is written in JavaScript, so before we can really read the
+file above, we need a tiny bit of JavaScript vocabulary — just
+enough to recognise the pieces. The next lesson is a short detour
+into pure JavaScript: **variables** and **functions**. Once those
+two ideas click, the rest of React is mostly new names for things
+you already understand.

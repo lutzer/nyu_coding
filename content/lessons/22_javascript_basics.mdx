@@ -1,0 +1,212 @@
+export const title = "JavaScript Basics";
+export const chapter = "Chapter 2: Interactivity & React";
+
+# JavaScript Basics
+
+Before we read any React code, we need a few words of **JavaScript**.
+JavaScript is a programming language — unlike HTML and CSS, which
+*describe* a page, JavaScript is a list of *instructions* the
+browser follows one after another.
+
+This lesson is a short detour: no React, no HTML tags, just two
+ideas that everything in React is built on top of.
+
+1. **Variables** — giving names to values.
+2. **Functions** — giving names to a chunk of instructions.
+
+That's it. Once these two feel familiar, the rest of the chapter is
+mostly new names for things you already understand.
+
+## Variables — a labeled box for a value
+
+A **variable** is a name you attach to a value, so you can refer to
+it later. Think of it as a labeled box: on the label you write a
+name, inside the box you put a value.
+
+You create a variable with the keyword **`const`** (short for
+*constant*):
+
+```js
+const greeting = "Hello";
+const count = 3;
+```
+
+Read `const greeting = "Hello";` as:
+
+> *"Let the name `greeting` stand for the text `"Hello"`."*
+
+From that line on, writing `greeting` anywhere in the file means
+`"Hello"`.
+
+### What can a variable hold?
+
+Anything. The most common kinds of values you'll meet:
+
+```js
+const name    = "Ada";        // text (a "string") — in quotes
+const age     = 29;           // a number — no quotes
+const isOpen  = true;         // true or false (a "boolean")
+const colors  = ["red", "green", "blue"];  // a list (an "array")
+const person  = { name: "Ada", age: 29 };  // a bundle of named values (an "object")
+```
+
+A few things to notice:
+
+- **Strings** go in quotes (`"Hello"` or `'Hello'`). Numbers don't.
+- **Booleans** are only ever `true` or `false` — no quotes.
+- **Arrays** use square brackets `[ ... ]` and hold a list of values.
+- **Objects** use curly braces `{ ... }` and hold named values. You
+  read one of those names back with a dot: `person.name` is `"Ada"`.
+
+### `const` vs `let`
+
+`const` means the name stays attached to the same value — you won't
+reassign it. If you need a variable whose value *will* change later,
+you use **`let`** instead:
+
+```js
+let score = 0;
+score = score + 1;   // allowed because it's `let`, not `const`
+```
+
+Default to `const`. Reach for `let` only when you really do need to
+change the value later.
+
+## Functions — a named chunk of instructions
+
+A **function** is a reusable block of instructions with a name. You
+can think of it as a little machine: it has a name, a body (the
+instructions), and you *call* it to make it run.
+
+The simplest possible function:
+
+```js
+function sayHello() {
+  console.log("Hello!");
+}
+```
+
+Four parts to notice:
+
+- The keyword **`function`** — tells JavaScript "a function is coming".
+- A **name** (`sayHello`) — how you refer to it later.
+- A pair of **parentheses** `()` — for inputs (empty here, we'll
+  get to that in a moment).
+- A pair of **curly braces** `{ ... }` — the *body* of the function.
+  Everything between the braces is what the function does when it
+  runs.
+
+Writing the function alone doesn't do anything — it just defines
+the machine. To actually run it, you **call** it by writing its
+name followed by parentheses:
+
+```js
+sayHello();   // prints: Hello!
+```
+
+### Parameters — giving a function inputs
+
+Most functions aren't useful without inputs. **Parameters** are
+names for the values a function expects when it's called. You list
+them inside the parentheses after the function name:
+
+```js
+function greet(name) {
+  console.log("Hello, " + name + "!");
+}
+
+greet("Ada");    // prints: Hello, Ada!
+greet("Linus");  // prints: Hello, Linus!
+```
+
+Inside the function body, `name` behaves like a normal variable —
+except its value comes from whoever called the function. Call
+`greet("Ada")` and `name` is `"Ada"`; call `greet("Linus")` and
+`name` is `"Linus"`.
+
+A function can take any number of parameters, separated by commas:
+
+```js
+function add(a, b) {
+  console.log(a + b);
+}
+
+add(2, 3);    // prints: 5
+add(10, 20);  // prints: 30
+```
+
+### `return` — handing a value back
+
+Printing something is nice, but usually you want a function to
+*compute* a value and hand it back so you can use it elsewhere.
+That's what the keyword **`return`** is for:
+
+```js
+function add(a, b) {
+  return a + b;
+}
+
+const sum = add(2, 3);   // sum is now 5
+```
+
+Read it step by step:
+
+1. `add(2, 3)` runs the function with `a = 2` and `b = 3`.
+2. Inside, `return a + b` hands back the value `5`.
+3. `const sum = ...` stores that returned value in a new variable
+   called `sum`.
+
+A function can return any kind of value — a number, a string, a
+boolean, an array, an object… or, as we'll see in the next lesson,
+even a chunk of UI.
+
+## Why this matters for React
+
+That last sentence is the whole point of this detour. In React,
+**every component is a function** — a function whose return value
+is a piece of the page.
+
+When you write a component, you're writing:
+
+- a function (with the `function` keyword and a name),
+- that takes some inputs (parameters),
+- and *returns* something React can draw on screen.
+
+In the next lesson we'll open `App.js` and read it with this in
+mind. You already know what every important word means — you just
+don't know yet what the function is returning.
+
+## Exercise
+
+Time to try the three ideas from this lesson in a tiny
+plain-JavaScript sandbox. You'll edit **`script.js`** — the panel
+on the right is a little terminal that shows whatever your script
+prints.
+
+To print a line, call the helper function `print(...)`:
+
+```js
+print("Hello!");
+print(2 + 3);
+```
+
+Each call adds one line to the terminal.
+
+Your job:
+
+1. **Change a variable.** At the top of `script.js`, replace
+   `"friend"` in `const name = "friend";` with your own name. The
+   first line in the terminal should update.
+2. **Read a working function.** Look at `greet`. Trace how `name`
+   goes in as the `person` parameter and how the returned string
+   ends up printed in the terminal.
+3. **Finish a function.** `add` is almost complete, but it always
+   returns `0`. Change its body so it returns the sum of `a` and
+   `b`. The two addition lines in the terminal should then show
+   the correct results.
+
+If something looks off, read the script top to bottom and ask
+yourself what each line is doing — variables are boxes, functions
+are little machines, `return` is what they hand back.
+
+<SandpackSnippet folder="javascript_basics/exercise" size="large" template="static" activeFile="/script.js" />

@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  background: #111;
+}
+
+#terminal {
+  color: #0f0;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 14px;
+  padding: 16px;
+  margin: 0;
+  min-height: 100vh;
+  white-space: pre-wrap;
+}
