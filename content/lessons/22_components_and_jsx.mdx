@@ -1,0 +1,127 @@
+export const title = "A React Component";
+export const chapter = "Chapter 2: Interactivity & React";
+
+# A React Component
+
+In the last lesson we said React builds pages out of **components**
+— small, reusable chunks of UI. In this lesson we'll open a real
+component and see what one actually looks like.
+
+Open the sandbox below and keep `App.js` visible on the left.
+
+<SandpackSnippet folder="react_intro/hello" size="large" template="react" activeFile="/App.js" />
+
+Here's the whole file:
+
+```jsx
+export default function App() {
+  return (
+    <div>
+      <h1>Hello from React!</h1>
+      <p>This paragraph is rendered by a React component.</p>
+    </div>
+  );
+}
+```
+
+Lots of unfamiliar words. Don't panic — most of them are just
+JavaScript, and we'll meet them properly in the next two lessons.
+For now, let's zoom in on the **shape** of a component.
+
+Ignore the two words `export default` for now. What's left is:
+
+```jsx
+function App() {
+  return (
+    <div>
+      <h1>Hello from React!</h1>
+      <p>This paragraph is rendered by a React component.</p>
+    </div>
+  );
+}
+```
+
+Three things to notice:
+
+1. The whole thing has a **name** — `App`.
+2. Inside the curly braces `{ ... }` is the code that *describes*
+   this component.
+3. The word **`return`** says *"here is the piece of page this
+   component represents"*. Everything between the parentheses
+   after `return` is what shows up on screen.
+
+So a component is a named block of code whose job is to **hand
+back a piece of the page**. React calls `App`, takes whatever it
+hands back, and puts it on screen.
+
+Two small conventions worth banking right now:
+
+- Component names start with a **capital letter** (`App`, not
+  `app`). That capital is how React tells your components apart
+  from built-in HTML tags later on.
+- A component always hands back **one** thing. If you want several
+  tags side by side, wrap them in a parent `<div>` (as `App` does
+  here).
+
+## JSX — HTML inside JavaScript
+
+Those `<div>`, `<h1>` and `<p>` tags look exactly like the HTML
+from Chapter 1, but they're sitting inside a JavaScript file. That
+mix has a name: **JSX**.
+
+JSX lets you write HTML-looking tags right inside your JavaScript.
+It's **not** real HTML — React translates it into real HTML
+elements when it puts your component on the page.
+
+A few small rules that will trip you up at first:
+
+- A component must return **one** element. If you want several
+  tags side by side, wrap them in a parent `<div>` (or an empty
+  wrapper `<>...</>`).
+- Every tag must be **closed**. Self-closing tags end with ` />`:
+  `<img src="..." />`, `<br />`, `<hr />`.
+- The HTML attribute `class` becomes **`className`** in JSX,
+  because `class` is a reserved word in JavaScript.
+- JSX comments go inside braces: `{/* like this */}`.
+
+## Reading `App.js` top to bottom
+
+With all of that in mind, here's the file again, with a comment
+on each line:
+
+```jsx
+export default function App() {   // define a component named `App`
+  return (                        // the component hands back…
+    <div>                         //   a <div> containing…
+      <h1>Hello from React!</h1>  //     a headline
+      <p>This paragraph is rendered by a React component.</p>
+    </div>                        //   (end of the <div>)
+  );
+}
+```
+
+That's a complete React component. It's named, it hands back some
+JSX, and React puts that JSX on the page.
+
+## Exercise
+
+Time to write some JSX of your own. The `App` component below is
+empty — it hands back `null`, so the page renders nothing. Replace
+`return null;` with a `return ( ... )` that hands back a `<div>`
+containing:
+
+1. An `<h1>` headline (whatever title you like).
+2. An `<img>` tag with `src="https://picsum.photos/300"`, nested
+   *inside* the same `<div>` as the headline.
+
+Remember:
+
+- A component must hand back **one** parent element — put both
+  the headline and the image inside the same `<div>`.
+- The `<img>` tag must be **self-closed**: `<img src="..." />`.
+
+<SandpackSnippet folder="react_intro/exercise" size="large" template="react" activeFile="/App.js" />
+
+In the next lesson we'll zoom in on the two JavaScript words we
+glossed over — `function` and `return` — along with **variables**.
+Those are the pieces that let a component actually *do* things.

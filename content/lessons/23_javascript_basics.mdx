@@ -3,19 +3,21 @@ export const chapter = "Chapter 2: Interactivity & React";
 
 # JavaScript Basics
 
-Before we read any React code, we need a few words of **JavaScript**.
-JavaScript is a programming language — unlike HTML and CSS, which
-*describe* a page, JavaScript is a list of *instructions* the
-browser follows one after another.
+You just saw a React component. It had a name, some JSX inside,
+and the word `return` saying what to hand back. All of that is
+written in **JavaScript** — the language React is written in.
 
-This lesson is a short detour: no React, no HTML tags, just two
-ideas that everything in React is built on top of.
+Unlike HTML and CSS, which *describe* a page, JavaScript is a
+list of *instructions* the browser follows one after another.
+Before we go further, let's slow down and learn the two JavaScript
+ideas that make a component tick:
 
 1. **Variables** — giving names to values.
 2. **Functions** — giving names to a chunk of instructions.
 
-That's it. Once these two feel familiar, the rest of the chapter is
-mostly new names for things you already understand.
+No React in this lesson, no HTML tags — just these two ideas on
+their own. Once they click, the component from the last lesson
+will read very differently.
 
 ## Variables — a labeled box for a value
 
@@ -157,24 +159,32 @@ Read it step by step:
    called `sum`.
 
 A function can return any kind of value — a number, a string, a
-boolean, an array, an object… or, as we'll see in the next lesson,
-even a chunk of UI.
+boolean, an array, an object… or, as we'll see soon, even a chunk
+of UI.
 
-## Why this matters for React
+## Back to the component
 
-That last sentence is the whole point of this detour. In React,
-**every component is a function** — a function whose return value
-is a piece of the page.
+Flip back to `App.js` from the last lesson in your head:
 
-When you write a component, you're writing:
+```jsx
+function App() {
+  return (
+    <div> ... </div>
+  );
+}
+```
 
-- a function (with the `function` keyword and a name),
-- that takes some inputs (parameters),
-- and *returns* something React can draw on screen.
+Now you can read it with the right vocabulary:
 
-In the next lesson we'll open `App.js` and read it with this in
-mind. You already know what every important word means — you just
-don't know yet what the function is returning.
+- `App` is a **function**. The `function` keyword and the name
+  tell you so.
+- It takes no **parameters** — the parentheses `()` are empty.
+- It **returns** a value — in this case the `<div>`.
+
+That's the whole trick: **every React component is a function
+whose return value is a piece of the page**. In the next lesson
+we'll meet one more JavaScript idea — **arrays** — because React
+builds pages out of lists.
 
 ## Exercise
 

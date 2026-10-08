@@ -1,0 +1,187 @@
+export const title = "Arrays & Loops";
+export const chapter = "Chapter 2: Interactivity & React";
+
+# Arrays & Loops
+
+Most interesting pages are built from **lists** of things — a list
+of pictures in a gallery, a list of friends, a list of search
+results. In JavaScript, lists are stored in **arrays**, and most
+of the time you don't just want to *have* a list — you want to
+**do something with every item** in it.
+
+That's what *looping* over an array means, and in JavaScript the
+two tools you reach for most are:
+
+- **`.forEach`** — do something for each item.
+- **`.map`** — build a new array from an old one.
+
+Both of these show up constantly in React, so getting comfortable
+with them now pays off twice.
+
+## Arrays, briefly
+
+You already met arrays in the last lesson:
+
+```js
+const colors = ["red", "green", "blue"];
+```
+
+A few quick facts worth having at your fingertips:
+
+- Items are **ordered**. The first item is `colors[0]`, the next
+  is `colors[1]`, and so on. (Counting starts at `0`, not `1`.)
+- `colors.length` tells you how many items are in the array.
+- Arrays can hold any kind of value — strings, numbers, booleans,
+  even other arrays or objects.
+
+```js
+const colors = ["red", "green", "blue"];
+
+print(colors[0]);       // "red"
+print(colors[2]);       // "blue"
+print(colors.length);   // 3
+```
+
+## A quick note on arrow functions
+
+Both `.forEach` and `.map` want a **function** as their input — a
+little recipe they'll apply to each item in the array. Before we
+get there, here's a shorter way to write a function inline.
+
+The form you already know:
+
+```js
+function double(n) {
+  return n * 2;
+}
+```
+
+An **arrow function** does the exact same thing in less space:
+
+```js
+const double = (n) => {
+  return n * 2;
+};
+```
+
+And if the body is just a single `return`, you can drop the braces
+and the `return` keyword entirely:
+
+```js
+const double = (n) => n * 2;
+```
+
+All three versions above describe the same function. We don't
+even have to give it a name — we can hand an arrow function
+straight to another function:
+
+```js
+numbers.forEach((n) => print(n));
+```
+
+Read that as *"for each `n` in `numbers`, call `print(n)`"*.
+
+## `.forEach` — do something for each item
+
+`.forEach` is the simplest way to loop over an array. You give it
+a function; it calls that function once per item, handing the item
+in as the parameter.
+
+```js
+const names = ["Ada", "Linus", "Grace"];
+
+names.forEach((name) => {
+  print(name);
+});
+```
+
+Output in the terminal:
+
+```
+Ada
+Linus
+Grace
+```
+
+A couple of things to notice:
+
+- `name` is just the parameter name — you choose it. It stands in
+  for one item at a time as the loop walks through.
+- `.forEach` **does not return anything**. You use it when the
+  point is a side effect — printing, logging, updating something —
+  not to produce a new value.
+
+## `.map` — build a new array
+
+`.map` also walks every item in the array. But instead of just
+doing something, it **collects** whatever your function returns
+into a brand new array of the same length.
+
+```js
+const numbers = [1, 2, 3];
+const doubled = numbers.map((n) => n * 2);
+
+print(doubled);   // [2, 4, 6]
+```
+
+Step by step:
+
+1. `.map` goes through `numbers` one item at a time.
+2. For each item, it calls your function and remembers the
+   returned value.
+3. When it's done, it hands back a new array of all those returned
+   values.
+
+Important: `.map` **does not change** the original array.
+`numbers` is still `[1, 2, 3]` afterwards; `doubled` is the new
+array that `.map` produced.
+
+## Which one when?
+
+A rule of thumb:
+
+- **`.forEach`** — *"do something for each item."* No new array.
+- **`.map`** — *"turn each item into something else."* Hands back
+  a new array.
+
+If you catch yourself using `.forEach` to push items into an empty
+array, you probably want `.map` instead. If you catch yourself
+using `.map` but ignoring the result, you probably want
+`.forEach`.
+
+## Why this matters for React
+
+React builds pages out of arrays. If you have a list of pictures
+and you want one `<Card />` for each, you'll write something like:
+
+```jsx
+pictures.map((picture) => <Card src={picture.src} />)
+```
+
+That's just `.map` — the same `.map` from this lesson. Each item
+in the array becomes one piece of UI. We'll come back to this
+pattern properly later; for now, if you can comfortably use
+`.map` on plain numbers and strings, you'll have no trouble when
+it shows up inside JSX.
+
+## Exercise
+
+The sandbox below has the same little terminal from the last
+lesson, plus two arrays to work with. Edit `script.js`.
+
+Your job:
+
+1. **`forEach`**. Use `names.forEach(...)` to print each name on
+   its own line in the terminal.
+2. **`map`**. Use `numbers.map(...)` to build a new array where
+   every number is **doubled**. Store the result in the variable
+   `doubled`. The existing `print("Doubled: " + doubled)` line
+   will then show the new values.
+
+If you're stuck on `map`, remember the pattern:
+
+```js
+const doubled = numbers.map((n) => n * 2);
+```
+
+<SandpackSnippet folder="arrays_and_loops/exercise" size="large" template="static" activeFile="/script.js" />
