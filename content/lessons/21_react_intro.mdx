@@ -15,21 +15,21 @@ that makes building that kind of interactive page much easier.
 ## What React actually is
 
 React is a JavaScript library for building user interfaces out of
-small, reusable pieces called **components**. A component is just a
-function that returns a chunk of UI.
+small, reusable pieces called **components**. A component is a named
+chunk of UI that you can drop into your page the same way you'd drop
+in an `<img>` or a `<div>`.
 
 Instead of writing one long `index.html`, you describe your page as a
 tree of components — a `<Gallery>` containing many `<Card>`s, each one
 containing an `<img>` and a `<Caption>`. React takes that tree and
 turns it into real HTML in the browser for you.
 
-Three ideas worth keeping in mind as we go:
+Three words worth keeping in mind as we go:
 
-- **Components** — reusable building blocks, written as JavaScript
-  functions.
-- **JSX** — a syntax that lets you write HTML-looking tags *inside*
-  JavaScript. It's not actually HTML; it's JavaScript that produces
-  elements.
+- **Component** — a reusable building block of your page.
+- **JSX** — a way to write HTML-looking tags *inside* a JavaScript
+  file. It's not actually HTML; the browser never sees JSX directly —
+  React turns it into real HTML elements.
 - **Rendering** — React takes your components and *renders* them into
   the real DOM (the live HTML tree in the browser).
 
@@ -54,6 +54,6 @@ file tabs on the left. Click through `App.js`, `index.js`,
 
 <SandpackSnippet folder="react_intro/hello" size="large" template="react" activeFile="/App.js" />
 
-In the next lesson we'll open `App.js` and `index.js` and look at
-what's inside them — and at how the files are wired together through
-`import` and `export`.
+In the next lesson we'll open `App.js` and `index.js` and read them
+line by line — starting from the very basics of what a JavaScript
+file actually *is*.

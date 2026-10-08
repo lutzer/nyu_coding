@@ -1,0 +1,181 @@
+export const title = "Your Own Components";
+export const chapter = "Chapter 2: Interactivity & React";
+
+# Your Own Components
+
+So far every page we've built lives inside one component — `App` —
+and that component returns a mix of built-in HTML tags like `<div>`,
+`<h1>`, and `<button>`. That's fine for a few lines, but it becomes
+unreadable fast.
+
+The real power of React is that **you can define your own tags**.
+If you want a `<Card>`, you just write one — and from then on you
+can drop `<Card />` into your JSX the same way you'd drop in an
+`<img />`.
+
+## Defining a component
+
+A component is just a function that returns JSX — you've been
+writing one all along (`App`). Here's a second one, defined in the
+same file:
+
+```jsx
+function Card() {
+  return (
+    <div className="card">
+      <img src="https://picsum.photos/200" alt="" />
+      <p>A random picture.</p>
+    </div>
+  );
+}
+```
+
+Two small things to notice:
+
+- The name starts with a **capital letter** (`Card`, not `card`).
+  That capital is how React tells your tags apart from built-in
+  HTML ones — lowercase names are treated as plain HTML.
+- There's **no `export default`** this time. `Card` only needs to
+  be visible inside this file; `App` is still the one component
+  that leaves the file.
+
+## Nesting a component inside `App`
+
+Once a component is defined, you use it in JSX just like a built-in
+tag — your capitalised name, followed by a self-closing slash:
+
+```jsx
+export default function App() {
+  return (
+    <div>
+      <h1>My Gallery</h1>
+      <Card />
+      <Card />
+      <Card />
+    </div>
+  );
+}
+```
+
+Three cards appear on the page. The real win: when you want to
+change what a card looks like, you edit `Card` in one place and
+every `<Card />` on the page updates.
+
+<SandpackSnippet folder="custom_components/basic" size="large" template="react" activeFile="/App.js" />
+
+## Making components configurable with props
+
+Three *identical* cards aren't very useful. Usually you want each
+one to show a different picture and caption. That's what **props**
+are for.
+
+Props are inputs you pass to a component — they look exactly like
+HTML attributes:
+
+```jsx
+<Card src="https://picsum.photos/200" caption="A random picture" />
+```
+
+Inside the component, those inputs arrive as the function's single
+parameter, conventionally called `props`. It's an object (a bundle
+of named values); you read individual props with a dot, like
+`props.src`:
+
+```jsx
+function Card(props) {
+  return (
+    <div className="card">
+      <img src={props.src} alt="" />
+      <p>{props.caption}</p>
+    </div>
+  );
+}
+```
+
+The curly braces inside JSX (`{props.src}`, `{props.caption}`) let
+you drop a JavaScript value into the output. Anything between `{ }`
+is evaluated as code — the result is what ends up on the page.
+
+Now every `<Card />` can be different.
+
+## Rendering a list with `.map()`
+
+Hard-coding three cards is fine. Hard-coding fifty is not. And
+usually the data isn't fixed — it comes from a file or from state.
+We need a way to produce **one `<Card />` per item in a list**.
+
+JavaScript stores lists in an **array**. Here's an array of three
+items, each one an object with a `src` and a `caption`:
+
+```js
+const pictures = [
+  { src: "https://picsum.photos/seed/one/200",   caption: "One"   },
+  { src: "https://picsum.photos/seed/two/200",   caption: "Two"   },
+  { src: "https://picsum.photos/seed/three/200", caption: "Three" },
+];
+```
+
+Arrays have a built-in method called **`.map()`** that walks through
+every item and gives back a new array of transformed values. In
+React, we use it to turn an array of data into an array of JSX
+elements:
+
+```jsx
+{pictures.map((picture) => (
+  <Card key={picture.caption} src={picture.src} caption={picture.caption} />
+))}
+```
+
+Read that line as:
+
+> *for each `picture` in `pictures`, hand back a `<Card>` with its
+> `src` and `caption`.*
+
+A few things worth unpacking:
+
+- `(picture) => ( ... )` is an **arrow function** — a short way to
+  write a function. You met the same shape in the last lesson:
+  `onClick={() => setCount(count + 1)}`. Here it takes one input
+  (`picture`) and returns one `<Card>`.
+- The whole `pictures.map(...)` expression is wrapped in `{ }`
+  because it sits inside JSX — remember, braces mean *"treat what's
+  inside as JavaScript"*.
+- Each `<Card>` gets a **`key`** prop. React uses `key` to tell
+  items apart when the list changes (an item is added, removed, or
+  reordered). The value just has to be unique **within the list** —
+  often an `id` field or, as here, something that's naturally
+  unique like the caption. `key` is a React-only prop; your
+  component never sees it in `props`.
+
+Put together:
+
+<SandpackSnippet folder="custom_components/list" size="large" template="react" activeFile="/App.js" />
+
+## Exercise
+
+The sandbox below has a different component: a `Tag` that renders a
+square tile with a background image behind a hashtag label. There's
+also an array of twelve **art categories**:
+
+```js
+const topics = ["painting", "sculpture", "photography", /* ... */];
+```
+
+Notice this array holds **plain strings**, not objects — so when
+you `.map()` over it, each item is just a string like
+`"painting"`, not something with a `.src` or `.caption` field.
+The `Tag` component takes care of its own styling — it picks a
+background colour from the label so every category gets its own
+distinct tile.
+
+An empty `<div className="grid">` is already in place — anything
+you render inside it will be laid out in a CSS grid.
+
+Your job: use `topics.map(...)` inside the `.grid` div to render
+one `<Tag />` per topic.
+
+- Pass each topic as the `label` prop (`<Tag label={...} />`).
+- Give each `<Tag />` a unique `key` — the topic string itself
+  works fine.
+
+<SandpackSnippet folder="custom_components/exercise" size="large" template="react" activeFile="/App.js" />
