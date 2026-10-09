@@ -16,31 +16,28 @@ two tools you reach for most are:
 - **`.map`** — build a new array from an old one.
 
 Both of these show up constantly in React, so getting comfortable
-with them now pays off twice.
+with them now pays off twice. Just like the last lesson, every
+snippet below has a little terminal: edit the code, see the
+terminal react.
 
 ## Arrays, briefly
 
-You already met arrays in the last lesson:
+You already met arrays in the last lesson. The snippet below is a
+one-minute refresher — a couple of facts worth having at your
+fingertips, all runnable:
 
-```js
-const colors = ["red", "green", "blue"];
-```
+<SandpackSnippet folder="arrays_and_loops/arrays" template="static" activeFile="/script.js" />
 
-A few quick facts worth having at your fingertips:
+Three things to take away from the editor:
 
 - Items are **ordered**. The first item is `colors[0]`, the next
   is `colors[1]`, and so on. (Counting starts at `0`, not `1`.)
 - `colors.length` tells you how many items are in the array.
 - Arrays can hold any kind of value — strings, numbers, booleans,
-  even other arrays or objects.
+  even other arrays or objects, mixed if you want.
 
-```js
-const colors = ["red", "green", "blue"];
-
-print(colors[0]);       // "red"
-print(colors[2]);       // "blue"
-print(colors.length);   // 3
-```
+Try the suggestion in the comment: add a 4th colour and read it
+back with `colors[3]`.
 
 ## A quick note on arrow functions
 
@@ -73,68 +70,57 @@ const double = (n) => n * 2;
 
 All three versions above describe the same function. We don't
 even have to give it a name — we can hand an arrow function
-straight to another function:
+straight to another function, which is exactly what both tools
+below do.
 
-```js
-numbers.forEach((n) => print(n));
-```
+## `.forEach` and `.map`
 
-Read that as *"for each `n` in `numbers`, call `print(n)`"*.
+The editor below shows both tools side by side — `.forEach` at
+the top, `.map` at the bottom. Read the sections of prose that
+follow and look at the matching chunk of code as you go.
 
-## `.forEach` — do something for each item
+<SandpackSnippet folder="arrays_and_loops/foreach_and_map" template="static" activeFile="/script.js" />
+
+### `.forEach` — do something for each item
 
 `.forEach` is the simplest way to loop over an array. You give it
 a function; it calls that function once per item, handing the item
 in as the parameter.
 
-```js
-const names = ["Ada", "Linus", "Grace"];
+Read `names.forEach((name) => { print(name); })` as:
 
-names.forEach((name) => {
-  print(name);
-});
-```
-
-Output in the terminal:
-
-```
-Ada
-Linus
-Grace
-```
+> *"For each `name` in `names`, run this block."*
 
 A couple of things to notice:
 
 - `name` is just the parameter name — you choose it. It stands in
-  for one item at a time as the loop walks through.
+  for one item at a time as the loop walks through. Try the
+  suggestion in the comment: rename it from `name` to `n` in both
+  places and watch the output stay the same.
 - `.forEach` **does not return anything**. You use it when the
   point is a side effect — printing, logging, updating something —
   not to produce a new value.
 
-## `.map` — build a new array
+### `.map` — build a new array
 
 `.map` also walks every item in the array. But instead of just
 doing something, it **collects** whatever your function returns
 into a brand new array of the same length.
 
-```js
-const numbers = [1, 2, 3];
-const doubled = numbers.map((n) => n * 2);
-
-print(doubled);   // [2, 4, 6]
-```
-
-Step by step:
+Step by step, following the lower half of the editor:
 
 1. `.map` goes through `numbers` one item at a time.
-2. For each item, it calls your function and remembers the
+2. For each item, it calls `(n) => n * 2` and remembers the
    returned value.
 3. When it's done, it hands back a new array of all those returned
-   values.
+   values and stores it in `doubled`.
 
-Important: `.map` **does not change** the original array.
-`numbers` is still `[1, 2, 3]` afterwards; `doubled` is the new
-array that `.map` produced.
+Important: `.map` **does not change** the original array. The
+terminal prints both — `numbers` is still `[1, 2, 3]` afterwards;
+`doubled` is the new array that `.map` produced.
+
+Try the second commented-out hint: use `.map` on `names` to build
+an array of greetings like `"Hello, Ada!"`.
 
 ## Which one when?
 
@@ -166,8 +152,8 @@ it shows up inside JSX.
 
 ## Exercise
 
-The sandbox below has the same little terminal from the last
-lesson, plus two arrays to work with. Edit `script.js`.
+The sandbox below has the same little terminal, plus two arrays to
+work with. Edit `script.js`.
 
 Your job:
 

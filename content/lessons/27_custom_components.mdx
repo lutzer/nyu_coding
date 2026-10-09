@@ -153,9 +153,23 @@ Put together:
 
 ## Exercise
 
-The sandbox below has a different component: a `Tag` that renders a
-square tile with a background image behind a hashtag label. There's
-also an array of twelve **art categories**:
+The sandbox below is split across two files:
+
+- **`Tag.js`** defines a `Tag` component — a square tile that
+  shows a hashtag label on top of an auto-picked background
+  colour. It's `export default`-ed from that file.
+- **`App.js`** is where you'll work. The first line already
+  imports `Tag`:
+
+  ```js
+  import Tag from "./Tag";
+  ```
+
+  From that point on, you can use `<Tag />` in your JSX just like
+  any built-in tag — no need to know how it's built. Peek inside
+  `Tag.js` if you're curious, but you shouldn't need to change it.
+
+`App.js` also has an array of twelve **art categories**:
 
 ```js
 const topics = ["painting", "sculpture", "photography", /* ... */];
@@ -164,15 +178,12 @@ const topics = ["painting", "sculpture", "photography", /* ... */];
 Notice this array holds **plain strings**, not objects — so when
 you `.map()` over it, each item is just a string like
 `"painting"`, not something with a `.src` or `.caption` field.
-The `Tag` component takes care of its own styling — it picks a
-background colour from the label so every category gets its own
-distinct tile.
 
 An empty `<div className="grid">` is already in place — anything
 you render inside it will be laid out in a CSS grid.
 
-Your job: use `topics.map(...)` inside the `.grid` div to render
-one `<Tag />` per topic.
+Your job: inside `App.js`, use `topics.map(...)` within the
+`.grid` div to render one `<Tag />` per topic.
 
 - Pass each topic as the `label` prop (`<Tag label={...} />`).
 - Give each `<Tag />` a unique `key` — the topic string itself

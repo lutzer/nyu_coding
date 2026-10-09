@@ -1,22 +1,26 @@
 // `print(value)` writes a line to the terminal on the right.
-// Use it to show the result of anything you want to try.
 
-// 1. Change this variable to your own name.
-const name = "friend";
+// Below is an object describing a product in a shop.
+// Read its fields with a dot:  product.name , product.price
+const product = {
+  name: "Headphones",
+  price: 100,
+};
 
-// 2. This function already works.
-//    It takes a `person` parameter and returns a greeting string.
-function greet(person) {
-  return "Hello, " + person + "!";
-}
+const quantity = 3;
 
-// 3. Finish this function so it returns the sum of a and b.
-//    Replace the 0 with the correct expression.
-function add(a, b) {
-  return 0;
-}
+// 1. Write a function `total(product, quantity)` that returns
+//    the price times the quantity.
+//    Two parameters, one `return`. No `print` inside — just return.
 
-// --- The lines below call the functions above and print the results. ---
-print(greet(name));
-print("2 + 3 = " + add(2, 3));
-print("10 + 7 = " + add(10, 7));
+
+// 2. Build a one-line summary and store it in a variable called
+//    `summary` to something that prints "3x headphones = 300"
+//    Hints:
+//      - glue strings and numbers together with `+`
+//      - read the product's name with `product.name`
+//      - call `total(product, quantity)` to get the number
+
+
+print("total: " + total(product, quantity));
+print(summary);

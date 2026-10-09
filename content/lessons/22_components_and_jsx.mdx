@@ -11,24 +11,7 @@ Open the sandbox below and keep `App.js` visible on the left.
 
 <SandpackSnippet folder="react_intro/hello" size="large" template="react" activeFile="/App.js" />
 
-Here's the whole file:
-
-```jsx
-export default function App() {
-  return (
-    <div>
-      <h1>Hello from React!</h1>
-      <p>This paragraph is rendered by a React component.</p>
-    </div>
-  );
-}
-```
-
-Lots of unfamiliar words. Don't panic — most of them are just
-JavaScript, and we'll meet them properly in the next two lessons.
-For now, let's zoom in on the **shape** of a component.
-
-Ignore the two words `export default` for now. What's left is:
+For now, let's zoom in on the **shape** of a component, we will look at the exporting and the single commands later.
 
 ```jsx
 function App() {
@@ -83,25 +66,6 @@ A few small rules that will trip you up at first:
 - The HTML attribute `class` becomes **`className`** in JSX,
   because `class` is a reserved word in JavaScript.
 - JSX comments go inside braces: `{/* like this */}`.
-
-## Reading `App.js` top to bottom
-
-With all of that in mind, here's the file again, with a comment
-on each line:
-
-```jsx
-export default function App() {   // define a component named `App`
-  return (                        // the component hands back…
-    <div>                         //   a <div> containing…
-      <h1>Hello from React!</h1>  //     a headline
-      <p>This paragraph is rendered by a React component.</p>
-    </div>                        //   (end of the <div>)
-  );
-}
-```
-
-That's a complete React component. It's named, it hands back some
-JSX, and React puts that JSX on the page.
 
 ## Exercise
 

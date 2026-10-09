@@ -16,8 +16,9 @@ ideas that make a component tick:
 2. **Functions** — giving names to a chunk of instructions.
 
 No React in this lesson, no HTML tags — just these two ideas on
-their own. Once they click, the component from the last lesson
-will read very differently.
+their own. The snippets below each come with a little terminal on
+the right: whenever your script calls `print(...)`, a new line
+shows up there. **Edit the code, see the terminal update.**
 
 ## Variables — a labeled box for a value
 
@@ -26,137 +27,106 @@ it later. Think of it as a labeled box: on the label you write a
 name, inside the box you put a value.
 
 You create a variable with the keyword **`const`** (short for
-*constant*):
+*constant*). Have a look at the editor — then try the suggestion
+in the comment:
 
-```js
-const greeting = "Hello";
-const count = 3;
-```
+<SandpackSnippet folder="javascript_basics/variables" template="static" activeFile="/script.js" />
 
 Read `const greeting = "Hello";` as:
 
 > *"Let the name `greeting` stand for the text `"Hello"`."*
 
 From that line on, writing `greeting` anywhere in the file means
-`"Hello"`.
+`"Hello"` — which is why `print(greeting)` ends up printing
+`Hello` in the terminal. The second line does the same with a
+number.
 
 ### What can a variable hold?
 
-Anything. The most common kinds of values you'll meet:
+Anything. The snippet below shows the five kinds of values you'll
+meet most often — a string, a number, a boolean, an array, and
+an object:
 
-```js
-const name    = "Ada";        // text (a "string") — in quotes
-const age     = 29;           // a number — no quotes
-const isOpen  = true;         // true or false (a "boolean")
-const colors  = ["red", "green", "blue"];  // a list (an "array")
-const person  = { name: "Ada", age: 29 };  // a bundle of named values (an "object")
-```
+<SandpackSnippet folder="javascript_basics/types" template="static" activeFile="/script.js" />
 
-A few things to notice:
+A few things to notice as you read the editor:
 
-- **Strings** go in quotes (`"Hello"` or `'Hello'`). Numbers don't.
+- **Strings** go in quotes (`"Ada"` or `'Ada'`). Numbers don't.
 - **Booleans** are only ever `true` or `false` — no quotes.
 - **Arrays** use square brackets `[ ... ]` and hold a list of values.
 - **Objects** use curly braces `{ ... }` and hold named values. You
-  read one of those names back with a dot: `person.name` is `"Ada"`.
+  pull one of those names back out with a dot: `person.name` is
+  `"Ada"`.
 
 ### `const` vs `let`
 
-`const` means the name stays attached to the same value — you won't
-reassign it. If you need a variable whose value *will* change later,
-you use **`let`** instead:
+`const` means the name stays attached to the same value — you
+won't reassign it. If you need a variable whose value *will*
+change later, you use **`let`** instead.
 
-```js
-let score = 0;
-score = score + 1;   // allowed because it's `let`, not `const`
-```
+The snippet below has both. Follow the comment and uncomment the
+line that tries to reassign a `const` — the terminal will show
+you the error:
 
-Default to `const`. Reach for `let` only when you really do need to
-change the value later.
+<SandpackSnippet folder="javascript_basics/let_vs_const" template="static" activeFile="/script.js" />
+
+Default to `const`. Reach for `let` only when you really do need
+to change the value later.
 
 ## Functions — a named chunk of instructions
 
-A **function** is a reusable block of instructions with a name. You
-can think of it as a little machine: it has a name, a body (the
-instructions), and you *call* it to make it run.
+A **function** is a reusable block of instructions with a name.
+You can think of it as a little machine: it has a name, a body
+(the instructions), and you *call* it to make it run.
 
-The simplest possible function:
+The simplest possible function has no inputs. Look at `sayHello`
+in the editor:
 
-```js
-function sayHello() {
-  console.log("Hello!");
-}
-```
+<SandpackSnippet folder="javascript_basics/functions" template="static" activeFile="/script.js" />
 
-Four parts to notice:
+Four parts to spot in the code:
 
 - The keyword **`function`** — tells JavaScript "a function is coming".
 - A **name** (`sayHello`) — how you refer to it later.
 - A pair of **parentheses** `()` — for inputs (empty here, we'll
   get to that in a moment).
 - A pair of **curly braces** `{ ... }` — the *body* of the function.
-  Everything between the braces is what the function does when it
-  runs.
+  Everything between the braces is what the function runs when it's
+  called.
 
-Writing the function alone doesn't do anything — it just defines
-the machine. To actually run it, you **call** it by writing its
-name followed by parentheses:
+Writing the function alone doesn't do anything — it just *defines*
+the machine. The three `sayHello();` lines below the definition
+are what actually make it run. Delete one of them and watch a
+line disappear from the terminal.
 
-```js
-sayHello();   // prints: Hello!
-```
-
-### Parameters — giving a function inputs
+### Parameters and `return`
 
 Most functions aren't useful without inputs. **Parameters** are
-names for the values a function expects when it's called. You list
-them inside the parentheses after the function name:
+names for the values a function expects when it's called. They go
+inside the parentheses after the function name.
 
-```js
-function greet(name) {
-  console.log("Hello, " + name + "!");
-}
+And usually you want the function to *compute* a value and hand
+it back so you can use it elsewhere — that's what the keyword
+**`return`** is for.
 
-greet("Ada");    // prints: Hello, Ada!
-greet("Linus");  // prints: Hello, Linus!
-```
+The snippet below shows both ideas at once: `greet` takes a
+`person` and returns a sentence; `add` takes two numbers and
+returns their sum.
 
-Inside the function body, `name` behaves like a normal variable —
-except its value comes from whoever called the function. Call
-`greet("Ada")` and `name` is `"Ada"`; call `greet("Linus")` and
-`name` is `"Linus"`.
+<SandpackSnippet folder="javascript_basics/functions_return" template="static" activeFile="/script.js" />
 
-A function can take any number of parameters, separated by commas:
+Read `greet("Ada")` step by step:
 
-```js
-function add(a, b) {
-  console.log(a + b);
-}
+1. The function runs with `person = "Ada"`.
+2. Inside, `return "Hello, " + person + "!"` hands back the
+   string `"Hello, Ada!"`.
+3. `const message = ...` stores that returned value in a new
+   variable called `message`.
 
-add(2, 3);    // prints: 5
-add(10, 20);  // prints: 30
-```
-
-### `return` — handing a value back
-
-Printing something is nice, but usually you want a function to
-*compute* a value and hand it back so you can use it elsewhere.
-That's what the keyword **`return`** is for:
-
-```js
-function add(a, b) {
-  return a + b;
-}
-
-const sum = add(2, 3);   // sum is now 5
-```
-
-Read it step by step:
-
-1. `add(2, 3)` runs the function with `a = 2` and `b = 3`.
-2. Inside, `return a + b` hands back the value `5`.
-3. `const sum = ...` stores that returned value in a new variable
-   called `sum`.
+Inside a function body, a parameter behaves like a normal
+variable — except its value comes from whoever called the
+function. Call `greet("Ada")` and `person` is `"Ada"`; call
+`greet("Linus")` and `person` is `"Linus"`.
 
 A function can return any kind of value — a number, a string, a
 boolean, an array, an object… or, as we'll see soon, even a chunk
@@ -188,35 +158,33 @@ builds pages out of lists.
 
 ## Exercise
 
-Time to try the three ideas from this lesson in a tiny
-plain-JavaScript sandbox. You'll edit **`script.js`** — the panel
-on the right is a little terminal that shows whatever your script
-prints.
-
-To print a line, call the helper function `print(...)`:
-
-```js
-print("Hello!");
-print(2 + 3);
-```
-
-Each call adds one line to the terminal.
+Time to put the ideas together. The sandbox starts with a
+`product` object (name + price) and a `quantity`. Both prints at
+the bottom are commented out — you'll uncomment them as you go.
 
 Your job:
 
-1. **Change a variable.** At the top of `script.js`, replace
-   `"friend"` in `const name = "friend";` with your own name. The
-   first line in the terminal should update.
-2. **Read a working function.** Look at `greet`. Trace how `name`
-   goes in as the `person` parameter and how the returned string
-   ends up printed in the terminal.
-3. **Finish a function.** `add` is almost complete, but it always
-   returns `0`. Change its body so it returns the sum of `a` and
-   `b`. The two addition lines in the terminal should then show
-   the correct results.
+1. **Write a function from scratch.** Add a function
+   `total(product, quantity)` that **returns** the product's
+   price times the quantity. Don't print inside the function —
+   just return the number. Then uncomment the first print; it
+   should show `total: 300`.
+2. **Combine strings, numbers, and a function call.** Make a
+   variable called `summary` that holds the sentence like 
+   `Headphones x3 = $300`. You'll need to glue a few pieces
+   together with `+`:  the product's name (`product.name`), the
+   literal `" x"`, the quantity, the literal `" = $"`, and the
+   result of calling `total(product, quantity)`. Then uncomment
+   the second print.
 
-If something looks off, read the script top to bottom and ask
-yourself what each line is doing — variables are boxes, functions
-are little machines, `return` is what they hand back.
+Things to watch out for:
+
+- `return` hands a value back — a function that `print`s but doesn't
+  `return` will give you `undefined` when you try to use its result.
+- JavaScript's `+` joins strings but adds numbers; when a string is
+  on either side, numbers get turned into strings. That's exactly
+  what you want for `summary`.
+- If something goes wrong, the terminal now shows the error. Read
+  it top to bottom — the message usually points at the problem.
 
 <SandpackSnippet folder="javascript_basics/exercise" size="large" template="static" activeFile="/script.js" />
