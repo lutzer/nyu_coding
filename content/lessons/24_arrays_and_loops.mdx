@@ -42,36 +42,34 @@ back with `colors[3]`.
 ## A quick note on arrow functions
 
 Both `.forEach` and `.map` want a **function** as their input — a
-little recipe they'll apply to each item in the array. Before we
-get there, here's a shorter way to write a function inline.
-
-The form you already know:
+little recipe they'll apply to each item in the array. Writing a
+full `function double(n) { return n * 2; }` just to hand it over
+is noisy, so JavaScript has a shorter form called an **arrow
+function**:
 
 ```js
+(n) => n * 2
+```
+
+Read it as *"take `n`, hand back `n * 2`"*. The parentheses hold
+the parameter, the arrow `=>` says "returns", and whatever is to
+the right of the arrow is what comes back. No `function`, no
+`return`, no braces — it's a one-line recipe you can pass straight
+to another function, which is exactly what we're about to do.
+
+(There are longer shapes of arrow function with `{ }` braces when
+you need multiple lines, but the one-liner above is all we need
+for now.)
+
+
+```js
+// these two statements the exact same thing:
+const double = (n) => n * 2;
+
 function double(n) {
   return n * 2;
 }
 ```
-
-An **arrow function** does the exact same thing in less space:
-
-```js
-const double = (n) => {
-  return n * 2;
-};
-```
-
-And if the body is just a single `return`, you can drop the braces
-and the `return` keyword entirely:
-
-```js
-const double = (n) => n * 2;
-```
-
-All three versions above describe the same function. We don't
-even have to give it a name — we can hand an arrow function
-straight to another function, which is exactly what both tools
-below do.
 
 ## `.forEach` and `.map`
 

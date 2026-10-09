@@ -63,6 +63,30 @@ every `<Card />` on the page updates.
 
 <SandpackSnippet folder="custom_components/basic" size="large" template="react" activeFile="/App.js" />
 
+## A quick detour: objects
+
+Before we make the card configurable, there's one JavaScript shape
+you haven't met yet: the **object**. Back in Lesson 23 we promised
+we'd come back to it, and props are the moment it matters.
+
+An object is a bundle of **named values**, written with curly
+braces:
+
+```js
+const person = { name: "Ada", age: 29 };
+```
+
+You read a single value out of it with a **dot**:
+
+```js
+person.name   // "Ada"
+person.age    // 29
+```
+
+That's the whole idea. Keep it in mind for the next section —
+props arrive as an object, and you'll read them with a dot in
+exactly the same way.
+
 ## Making components configurable with props
 
 Three *identical* cards aren't very useful. Usually you want each
@@ -77,9 +101,9 @@ HTML attributes:
 ```
 
 Inside the component, those inputs arrive as the function's single
-parameter, conventionally called `props`. It's an object (a bundle
-of named values); you read individual props with a dot, like
-`props.src`:
+parameter, conventionally called `props`. It's an **object** — the
+same shape you just met — and you read individual props with a
+dot, like `props.src`:
 
 ```jsx
 function Card(props) {
@@ -134,9 +158,9 @@ Read that line as:
 A few things worth unpacking:
 
 - `(picture) => ( ... )` is an **arrow function** — a short way to
-  write a function. You met the same shape in the last lesson:
-  `onClick={() => setCount(count + 1)}`. Here it takes one input
-  (`picture`) and returns one `<Card>`.
+  write a function. You met the same shape when we wired `onClick`
+  (e.g. `onClick={() => setCount(count + 1)}`). Here it takes one
+  input (`picture`) and returns one `<Card>`.
 - The whole `pictures.map(...)` expression is wrapped in `{ }`
   because it sits inside JSX — remember, braces mean *"treat what's
   inside as JavaScript"*.

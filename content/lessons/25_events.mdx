@@ -1,0 +1,82 @@
+export const title = "Events";
+export const chapter = "Chapter 2: Interactivity & React";
+
+# Events
+
+So far every page we've built just *shows* something. In this lesson
+we take the first step towards **interactivity**: making a component
+run some code when the user does something — a click, a hover, a
+key press.
+
+The piece that does the work is called an **event handler**: a
+function you hand to a JSX tag, and that React will call for you
+when the event happens.
+
+## Reacting to a click
+
+Any JSX tag can take an `onClick` attribute. Its value is a
+function — React will call that function whenever the element is
+clicked.
+
+<SandpackSnippet folder="interactivity/click" size="large" template="react" activeFile="/App.js" />
+
+Three things to spot in the editor:
+
+- `handleClick` is just a normal function, defined *inside* `App`.
+  It doesn't run on its own.
+- `onClick={handleClick}` on the `<button>` hands that function
+  over to React. Notice we pass `handleClick` — we don't *call* it
+  (no parentheses). Calling it would run it right away; we only
+  want it to run when the button is clicked.
+- The curly braces around `{handleClick}` are the same braces you
+  met in JSX before: *"treat what's inside as JavaScript"*.
+
+## Inline handlers
+
+If the function is short, you don't have to declare it on a
+separate line. You can pass an arrow function straight to
+`onClick`:
+
+```jsx
+<button onClick={() => alert("Hi!")}>Say hi</button>
+```
+
+The `() => alert("Hi!")` part is an arrow function with no
+parameters — same shape as the ones you passed to `.map` in the
+last lesson, just without an input. Use whichever style reads
+better: a named function for anything longer than a line, an
+inline arrow for one-liners.
+
+## Other events
+
+`onClick` is the one you'll reach for most, but every common event
+has a matching attribute: `onMouseEnter`, `onMouseLeave`,
+`onChange` (for inputs), `onSubmit` (for forms), and plenty more.
+They all work the same way — hand them a function, React calls it
+when the event happens.
+
+## Exercise
+
+The sandbox below has a "Say hi" button that doesn't do anything
+yet. Your job: wire it up so a click runs **two** steps in a row:
+
+1. Ask the user for their name with
+   `prompt("What's your name?")` — this pops up an input box and
+   gives you back whatever they typed as a string.
+2. Greet them with `alert("Hi, " + name + "!")`, using the name
+   from step 1.
+
+<SandpackSnippet folder="interactivity/events_exercise" size="large" template="react" activeFile="/App.js" />
+
+A hint on shape: your handler needs two lines (one for `prompt`,
+one for `alert`), so a named function reads more clearly here
+than an inline arrow:
+
+```jsx
+function handleClick() {
+  const name = prompt("What's your name?");
+  alert("Hi, " + name + "!");
+}
+```
+
+Then just pass it in with `onClick={handleClick}`.

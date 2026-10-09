@@ -1,0 +1,40 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 24px;
+  color: #222;
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tag {
+  font-size: 14px;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.tag.active {
+  background: #222;
+  color: white;
+  border-color: #222;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  gap: 12px;
+}
+
+.gallery img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;
+}

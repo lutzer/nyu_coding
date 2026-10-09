@@ -1,0 +1,162 @@
+export const title = "State";
+export const chapter = "Chapter 2: Interactivity & React";
+
+# State
+
+In the last lesson you wired a button to a function — a click
+fires some code. That's half of interactivity. The other half is
+making the page actually **change** in response: a counter that
+goes up, an image that appears and disappears, a tag that gets
+highlighted.
+
+For that we need a kind of value that is special in two ways:
+
+1. It **survives** across renders — a plain variable gets reset
+   every time the component function runs.
+2. When it changes, it **tells React** so React can render the
+   component again with the new value.
+
+That's what **state** is, and React gives it to us through a
+function called `useState`.
+
+## Why a normal variable doesn't work
+
+Try this in your head: you want a counter that goes up by one
+every time you click. The obvious try is:
+
+```jsx
+export default function App() {
+  let count = 0;
+  return (
+    <button onClick={() => count = count + 1}>
+      Clicked {count} times
+    </button>
+  );
+}
+```
+
+It doesn't work. The variable `count` *does* change — but React
+has no way of knowing it changed, so it never re-renders. The
+button on screen keeps showing `0`.
+
+## `useState`
+
+`useState` is a function from the React library. Like `createRoot`,
+it's a **named** import:
+
+```js
+import { useState } from "react";
+```
+
+Inside your component, call it with the **initial value**:
+
+```jsx
+const [count, setCount] = useState(0);
+```
+
+That one line gives you two things back:
+
+- `count` — the current value (starts at `0` the first time).
+- `setCount` — a function to change it. Calling `setCount(newValue)`
+  tells React *"store this new value **and** re-render the
+  component"*.
+
+The square-bracket syntax (`const [a, b] = ...`) is called **array
+destructuring** — it just unpacks the two things `useState` hands
+back into two named variables.
+
+Here's the counter done properly — click a few times:
+
+<SandpackSnippet folder="interactivity/counter" size="large" template="react" activeFile="/App.js" />
+
+Every `setCount` call causes React to run the `App` function
+again, and this time `useState(0)` hands back the stored value
+instead of the initial `0`.
+
+## The render loop
+
+That back-and-forth between your component and React is called the
+**render loop**:
+
+```text
+     ┌────────────────────────────┐
+     │ 1. React calls App()       │
+     │    → returns JSX           │
+     └─────────────┬──────────────┘
+                   │
+                   ▼
+     ┌────────────────────────────┐
+     │ 2. React paints the DOM    │
+     │    (what you see on screen)│
+     └─────────────┬──────────────┘
+                   │
+                   ▼
+     ┌────────────────────────────┐
+     │ 3. User clicks the button  │
+     │    → setCount(count + 1)   │
+     └─────────────┬──────────────┘
+                   │
+                   ▼
+     ┌────────────────────────────┐
+     │ 4. React stores the new    │
+     │    value and loops back    │
+     │    to step 1               │
+     └────────────────────────────┘
+```
+
+One trip around the loop is called a **render**. On each render
+the `App` function runs again from top to bottom, `useState` hands
+back the latest stored value, and React compares the new JSX with
+what's already on the page and updates only the parts that changed.
+
+So the mental model is: your component is a *recipe* that React
+re-runs whenever state changes. You never update the screen
+directly — you update state, and React takes care of the rest.
+
+A few rules that will save you headaches:
+
+- Always update state through the setter (`setCount(...)`), never
+  by assigning to the variable directly.
+- `useState` must be called at the **top** of your component — not
+  inside an `if` or a loop. React relies on the call order.
+- You can call `useState` as many times as you need — one per
+  piece of state.
+
+## Showing and hiding with `&&`
+
+State is also how we decide whether to **show** something or not.
+Pair a boolean piece of state with a tiny JSX trick called
+**conditional rendering**:
+
+```jsx
+{visible && <img src="https://picsum.photos/300" alt="random" />}
+```
+
+The `&&` operator (read it as *"and"*) looks at the value on its
+left:
+
+- If `visible` is **`true`**, the whole expression becomes the
+  `<img>` on the right, and React renders it.
+- If `visible` is **`false`**, the expression short-circuits to
+  `false`, and React renders nothing in that spot.
+
+So the picture appears exactly when `visible` is `true`. Flip the
+boolean with `setVisible(!visible)` and the image appears or
+disappears on the next render.
+
+## Exercise
+
+The component below already has the JSX for showing an image
+conditionally and a button to toggle it. What's missing is the
+state.
+
+Your job:
+
+1. Add a piece of state called `visible` with an initial value of
+   `true` using `useState`.
+2. Wire the button's `onClick` so it flips `visible` to its
+   opposite: `setVisible(!visible)`.
+
+Click the button — the image should appear and disappear.
+
+<SandpackSnippet folder="interactivity/exercise" size="large" template="react" activeFile="/App.js" />

@@ -1,0 +1,98 @@
+export const title = "Imports & Exports";
+export const chapter = "Chapter 2: Interactivity & React";
+
+# Imports & Exports
+
+Up to now we've written everything inside one file: `App.js`. In
+the next lesson you'll start making your own components, and
+you'll want to put each one in its own file to keep things tidy.
+
+For that to work, files need a way to **share code with each
+other**. That's what **`export`** and **`import`** are for. This
+is a short lesson: just enough to make the next one feel natural.
+
+Open the sandbox below and keep both `App.js` and `index.js`
+visible.
+
+<SandpackSnippet folder="react_intro/hello" size="large" template="react" activeFile="/App.js" />
+
+## Each file is its own little world
+
+In JavaScript, every file is isolated. Variables and functions you
+declare in one file are **not** visible in another, unless you
+deliberately share them. Two sides to that sharing:
+
+- A file **`export`s** things it wants to make available.
+- Another file **`import`s** them to use them.
+
+## `export default` — the main thing a file hands out
+
+Look at the first line of `App.js`:
+
+```jsx
+export default function App() { ... }
+```
+
+The two extra words — **`export default`** — mean *"make this
+function available to other files"*. Without them, `App` would
+exist only inside `App.js` and no other file could see it.
+
+A file can `export default` **one** main thing — usually its most
+important function or component. That's why `App.js` uses it: the
+whole file exists to produce one component.
+
+## Default imports
+
+Switch to `index.js` and look at this line:
+
+```js
+import App from "./App";
+```
+
+This picks up the one thing `App.js` marked as `export default`
+and calls it `App` here.
+
+The path `"./App"` means *"a file next to this one named `App`"*.
+The leading `./` is important — it says *"look in my own
+project"*. You don't need to write `.js` at the end; the bundler
+figures that out.
+
+## Named imports
+
+A file can also export several things *by name*. The same
+`index.js` has one of these at the top:
+
+```js
+import { createRoot } from "react-dom/client";
+```
+
+To pull in a named export, you put the **exact same name** inside
+curly braces. You met this pattern in the last lesson too:
+
+```js
+import { useState } from "react";
+```
+
+Notice these paths have **no** `./` in front. That tells
+JavaScript *"this isn't one of my own files — look in the
+installed packages"*. That's how we pull in React itself.
+
+## Side-effect imports
+
+One more flavour, also in `index.js`:
+
+```js
+import "./styles.css";
+```
+
+Sometimes you import a file not to get a value out of it, just to
+*include* it. For CSS, this tells the bundler *"attach this
+stylesheet to the page"*. No variable comes out; the rules in the
+file just start applying.
+
+## That's it
+
+With those three shapes — `export default` / default import, named
+imports, and side-effect imports — you can read any React project.
+In the next lesson we'll put this to work: `Tag.js` will export a
+component, and `App.js` will import it.

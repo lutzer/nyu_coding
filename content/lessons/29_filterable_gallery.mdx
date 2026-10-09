@@ -1,0 +1,167 @@
+export const title = "A Filterable Gallery";
+export const chapter = "Chapter 2: Interactivity & React";
+
+# A Filterable Gallery
+
+Back in Lesson 21 we promised a gallery that filters when you
+pick a tag. You now have every piece you need to build one:
+
+- **State** that remembers which tag is selected.
+- **Components with props** for the tag buttons.
+- **`.map`** to render both the tags and the pictures.
+
+This lesson puts them all together. One new idea comes in: when a
+child component needs to **change** a value that the parent owns,
+the parent passes the setter down as a prop. That pattern is
+called **lifting state up**.
+
+## The finished thing
+
+Open the sandbox, click the tags, and watch the gallery filter:
+
+<SandpackSnippet folder="filterable_gallery/basic" size="large" template="react" activeFile="/App.js" />
+
+Everything in there is a shape you've seen before — but it's a
+lot at once, so let's read it in three passes.
+
+## Pass 1 — where the state lives
+
+Scroll to the `App` component. The first line inside it is:
+
+```jsx
+const [selected, setSelected] = useState("all");
+```
+
+That is the whole truth about which tag is currently picked. It
+lives in `App`, and only `App` can change it (via `setSelected`).
+Every click, no matter which `<Tag>` fired it, has to end up
+calling this one `setSelected`.
+
+## Pass 2 — filtering with `.filter`
+
+Just below the state is this line:
+
+```jsx
+const visible = pictures.filter(
+  (p) => selected === "all" || p.topic === selected
+);
+```
+
+`.filter` is the third array method in your toolbox. Its shape is
+the same as `.map`: you hand it a function, it walks every item.
+The difference is the return value:
+
+- With `.map`, the function **transforms** each item; the result
+  is a new array of the same length.
+- With `.filter`, the function returns `true` or `false` for each
+  item, and the result is a new array containing **only the items
+  that returned `true`**.
+
+So `visible` is a smaller array containing only the pictures
+whose topic matches `selected` (or every picture, when `selected`
+is `"all"`).
+
+Then the JSX just maps over `visible` instead of `pictures`:
+
+```jsx
+{visible.map((p) => <img key={p.src} src={p.src} alt={p.topic} />)}
+```
+
+React re-runs `App` every time `selected` changes, which means
+`visible` gets rebuilt and only the matching images appear.
+
+## Pass 3 — lifting state up
+
+Now look at the `Tag` component at the top of the file:
+
+```jsx
+function Tag(props) {
+  const active = props.label === props.selected;
+  return (
+    <button
+      className={active ? "tag active" : "tag"}
+      onClick={() => props.onSelect(props.label)}
+    >
+      {props.label}
+    </button>
+  );
+}
+```
+
+`Tag` is a plain component with three props:
+
+- `label` — the text to show (e.g. `"painting"`).
+- `selected` — the tag that is currently picked, so `Tag` can
+  decide whether to highlight itself.
+- `onSelect` — a **function** the parent handed down. `Tag` calls
+  it with its own label when the button is clicked.
+
+That last bullet is the whole trick. `Tag` doesn't own any state.
+It doesn't even know what the setter is called. All it does is
+say *"hey parent, I got clicked, my label is `painting`"* — and
+the parent decides what to do.
+
+Back in `App`, that's exactly how `Tag` is used:
+
+```jsx
+<Tag key={t} label={t} selected={selected} onSelect={setSelected} />
+```
+
+`setSelected` — the setter you got from `useState` — is passed in
+as the `onSelect` prop. When `Tag` calls `props.onSelect(props.label)`,
+it's really calling `setSelected("painting")`, which updates state
+in `App`, which re-renders everything.
+
+That round trip — **state in the parent, setter in the child via
+props, child calls it on an event** — is the pattern you'll use
+all the time in React. It has a name: **lifting state up**. The
+state lives as high as it needs to live for everyone who cares
+about it, and the children get the setter when they need to
+change it.
+
+## Why not keep the state inside `Tag`?
+
+Tempting idea: give each `Tag` its own `selected` state. The
+problem is that every `Tag` would have its own private answer —
+there'd be no single source of truth. Clicking "painting" in one
+tag would have no effect on the others, and the `Gallery` would
+have no idea which one is picked.
+
+A good rule of thumb: **state belongs to the lowest component
+that is still above everyone who needs to read or change it.**
+Here, `App` is both the thing that filters the gallery and the
+thing that renders the tags, so `App` is where `selected` lives.
+
+## Exercise
+
+The sandbox below has the same structure, but the `Tag` component
+is missing one line — the `<button>` has no `onClick`. As a
+result, clicking a tag does nothing: the state in `App` never
+changes.
+
+Your job: wire the button's `onClick` so that clicking the tag
+tells the parent which label was picked. The handler should call
+`props.onSelect(props.label)`.
+
+<SandpackSnippet folder="filterable_gallery/exercise" size="large" template="react" activeFile="/App.js" />
+
+Hints:
+
+- You pass a function to `onClick`, so use an arrow function:
+  `onClick={() => props.onSelect(props.label)}`.
+- The active-tag highlight (`className={active ? ...}`) is
+  already in place — once state updates on each click, that line
+  will start lighting up the right button automatically.
+
+## Where to go from here
+
+You now have a complete small React app: components, props,
+state, events, lists, and lifting state up. The patterns don't
+really get bigger than this — real apps are mostly just more
+components wired the same way.
+
+Natural next steps, when you're ready: loading data from a file
+or an API (`useEffect` + `fetch`), building forms with
+**controlled inputs** (same `onChange` + state pattern), and
+splitting a growing `App.js` into smaller files using the
+`import` / `export` you learned in Lesson 27.

@@ -43,9 +43,8 @@ number.
 
 ### What can a variable hold?
 
-Anything. The snippet below shows the five kinds of values you'll
-meet most often — a string, a number, a boolean, an array, and
-an object:
+Lots of different kinds of values. The snippet below shows the four
+you'll meet first — a string, a number, a boolean, and an array:
 
 <SandpackSnippet folder="javascript_basics/types" template="static" activeFile="/script.js" />
 
@@ -54,9 +53,9 @@ A few things to notice as you read the editor:
 - **Strings** go in quotes (`"Ada"` or `'Ada'`). Numbers don't.
 - **Booleans** are only ever `true` or `false` — no quotes.
 - **Arrays** use square brackets `[ ... ]` and hold a list of values.
-- **Objects** use curly braces `{ ... }` and hold named values. You
-  pull one of those names back out with a dot: `person.name` is
-  `"Ada"`.
+
+There's one more kind — **objects** — that we'll meet later, when
+we start passing data between components.
 
 ### `const` vs `let`
 
@@ -129,8 +128,7 @@ function. Call `greet("Ada")` and `person` is `"Ada"`; call
 `greet("Linus")` and `person` is `"Linus"`.
 
 A function can return any kind of value — a number, a string, a
-boolean, an array, an object… or, as we'll see soon, even a chunk
-of UI.
+boolean, an array… or, as we'll see soon, even a chunk of UI.
 
 ## Back to the component
 
@@ -158,24 +156,22 @@ builds pages out of lists.
 
 ## Exercise
 
-Time to put the ideas together. The sandbox starts with a
-`product` object (name + price) and a `quantity`. Both prints at
-the bottom are commented out — you'll uncomment them as you go.
+Time to put the ideas together. The sandbox starts with three
+variables: a `productName`, a `price`, and a `quantity`.
 
 Your job:
 
 1. **Write a function from scratch.** Add a function
-   `total(product, quantity)` that **returns** the product's
-   price times the quantity. Don't print inside the function —
-   just return the number. Then uncomment the first print; it
-   should show `total: 300`.
+   `total(price, quantity)` that **returns** the price times the
+   quantity. Don't print inside the function — just return the
+   number. The first print at the bottom should then show
+   `total: 300`.
 2. **Combine strings, numbers, and a function call.** Make a
-   variable called `summary` that holds the sentence like 
+   variable called `summary` that holds the sentence like
    `Headphones x3 = $300`. You'll need to glue a few pieces
-   together with `+`:  the product's name (`product.name`), the
-   literal `" x"`, the quantity, the literal `" = $"`, and the
-   result of calling `total(product, quantity)`. Then uncomment
-   the second print.
+   together with `+`: `productName`, the literal `" x"`, the
+   `quantity`, the literal `" = $"`, and the result of calling
+   `total(price, quantity)`. The second print will then show it.
 
 Things to watch out for:
 
