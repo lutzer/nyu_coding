@@ -12,5 +12,3 @@ print(colors.length);
 // Arrays can hold any kind of value, even mixed:
 const stuff = ["Ada", 29, true];
 print(stuff[1]);
-
-// Try: add a 4th colour, then print it with colors[3].

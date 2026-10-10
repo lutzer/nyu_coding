@@ -1,0 +1,137 @@
+export const title = "Setting up a local IDE";
+export const chapter = "Chapter 1: Web Basics";
+
+# Setting up a Local IDE
+
+So far every snippet has run in the little in-browser editor on the
+right. That is great for learning, but it is not how real projects
+are built. On your own computer you will use:
+
+- a **code editor** — a desktop app for writing files
+- **Node.js** and **npm** — the toolchain that runs JavaScript outside
+  the browser and installs small helper programs
+
+In this lesson you will install both, download a starter project, and
+open the finished gallery from the previous lesson on your own
+machine.
+
+## 1. Install Visual Studio Code
+
+**Visual Studio Code** (VS Code) is a free code editor made by
+Microsoft. It is the most common editor for web development.
+
+### Windows
+
+1. Go to <a href="https://code.visualstudio.com/" target="_blank">code.visualstudio.com</a>
+   and click **Download for Windows**. You will get a file like
+   `VSCodeUserSetup-x64-*.exe`.
+2. Double-click the installer and accept all the defaults. When it
+   asks, tick **"Add to PATH"** and **"Register Code as an editor for
+   supported file types"**.
+3. Launch **Visual Studio Code** from the Start menu.
+
+### Mac
+
+1. Go to <a href="https://code.visualstudio.com/" target="_blank">code.visualstudio.com</a>
+   and click **Download for Mac**. You will get a `.zip` file.
+2. Double-click the zip to unpack it, then drag **Visual Studio
+   Code.app** into your **Applications** folder.
+3. Open it from Launchpad or Spotlight (`⌘ Space`, type "Visual
+   Studio Code").
+
+## 2. Install Node.js and npm
+
+**Node.js** is JavaScript running outside the browser. **npm** (the
+Node Package Manager) comes bundled with it and is used to install
+libraries and small command-line tools.
+
+### Windows
+
+1. Go to <a href="https://nodejs.org/" target="_blank">nodejs.org</a>
+   and download the **LTS** installer (the green button on the left).
+2. Run the `.msi` installer and accept the defaults. Node, npm, and
+   the Windows PATH entries will all be set up for you.
+3. Open **PowerShell** (press `Win`, type "PowerShell") and verify:
+
+```sh
+node --version
+npm --version
+```
+
+Both commands should print a version number.
+
+### Mac
+
+1. Go to <a href="https://nodejs.org/" target="_blank">nodejs.org</a>
+   and download the **LTS** installer (the green button on the left).
+2. Open the `.pkg` and click through the installer.
+3. Open **Terminal** (`⌘ Space`, type "Terminal") and verify:
+
+```sh
+node --version
+npm --version
+```
+
+Both commands should print a version number.
+
+<small>If you already use Homebrew, `brew install node` works too.</small>
+
+## 3. Download the starter project
+
+The starter is the completed gallery from the previous lesson —
+HTML, CSS, the logo, and nine artwork images, ready to run locally.
+
+<a
+   href={`${import.meta.env.BASE_URL}gallery-starter.zip`}
+>
+   Download gallery-starter.zip
+</a>
+
+1. Save the file somewhere easy to find, like your **Desktop** or
+   **Documents** folder.
+2. Double-click it to unzip. You should get a folder called
+   `gallery_starter` containing `index.html`, `styles.css`,
+   `logo.svg`, and an `images/` folder.
+
+## 4. Open the project in VS Code
+
+1. Launch **Visual Studio Code**.
+2. From the menu bar choose **File → Open Folder…** (Mac: **File →
+   Open…**) and pick the `gallery_starter` folder you just unzipped.
+3. In the sidebar on the left you will see the files. Click
+   `index.html` to view it, then `styles.css`.
+
+## 5. Run the page locally
+
+The simplest way is to open `index.html` straight in your browser:
+
+- **Windows** — right-click `index.html` in VS Code's sidebar and
+  choose **Reveal in File Explorer**, then double-click it.
+- **Mac** — right-click `index.html` and choose **Reveal in Finder**,
+  then double-click it.
+
+That works, but the URL will start with `file://` and some features
+(like `fetch` and ES modules, which you will meet in Chapter 2) will
+not work. A better habit is to serve the folder with a tiny local web
+server. In VS Code, open the built-in terminal (**Terminal → New
+Terminal**) and run:
+
+```sh
+npx live-server
+```
+
+The first time, npm will ask to download the `live-server` package —
+press `y`. It will start a server, open your browser automatically,
+and — the nice part — **reload the page every time you save a file**.
+Edit `styles.css`, hit save, and the browser updates on its own.
+
+## What you now have
+
+- A real code editor on your machine.
+- Node and npm installed, so you can run JavaScript tools from the
+  terminal.
+- A local project you can open, edit, and view in your browser —
+  exactly the setup you will use for the rest of the course.
+
+In the next chapter we will move from static pages to **React**,
+which uses the same Node and npm you just installed.
