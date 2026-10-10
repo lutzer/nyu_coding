@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "npm run build:gallery-zip && vite build",
+    "preview": "vite preview",
+    "build:gallery-zip": "node scripts/build-gallery-starter-zip.mjs"
   },
   "dependencies": {
     "@codesandbox/sandpack-react": "^2.19.9",
