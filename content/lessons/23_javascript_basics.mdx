@@ -9,14 +9,13 @@ written in **JavaScript** — the language React is written in.
 
 Unlike HTML and CSS, which *describe* a page, JavaScript is a
 list of *instructions* the browser follows one after another.
-Before we go further, let's slow down and learn the two JavaScript
-ideas that make a component tick:
+Before we go further, let's slow down and learn the two most important
+JavaScript ingredients:
 
 1. **Variables** — giving names to values.
 2. **Functions** — giving names to a chunk of instructions.
 
-No React in this lesson, no HTML tags — just these two ideas on
-their own. The snippets below each come with a little terminal on
+The snippets below each come with a little terminal on
 the right: whenever your script calls `print(...)`, a new line
 shows up there. **Edit the code, see the terminal update.**
 
@@ -95,8 +94,7 @@ Four parts to spot in the code:
 
 Writing the function alone doesn't do anything — it just *defines*
 the machine. The three `sayHello();` lines below the definition
-are what actually make it run. Delete one of them and watch a
-line disappear from the terminal.
+are what actually make it run.
 
 ### Parameters and `return`
 
@@ -142,17 +140,8 @@ function App() {
 }
 ```
 
-Now you can read it with the right vocabulary:
-
-- `App` is a **function**. The `function` keyword and the name
-  tell you so.
-- It takes no **parameters** — the parentheses `()` are empty.
-- It **returns** a value — in this case the `<div>`.
-
-That's the whole trick: **every React component is a function
-whose return value is a piece of the page**. In the next lesson
-we'll meet one more JavaScript idea — **arrays** — because React
-builds pages out of lists.
+This react component is nothing else than a javascript function with the name *App*. 
+It returns the html elements written inside the return brackets.
 
 ## Exercise
 
