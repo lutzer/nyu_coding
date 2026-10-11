@@ -134,24 +134,67 @@ thing that renders the tags, so `App` is where `selected` lives.
 
 ## Exercise
 
-The sandbox below has the same structure, but the `Tag` component
-is missing one line — the `<button>` has no `onClick`. As a
-result, clicking a tag does nothing: the state in `App` never
-changes.
+The sandbox below uses the same pattern in a different shape: an
+FAQ accordion. `App` holds one piece of state — `openId`, the id
+of the question that's currently open — and renders a list of
+`Faq` components. Only the one whose id matches `openId` should
+show its answer.
 
-Your job: wire the button's `onClick` so that clicking the tag
-tells the parent which label was picked. The handler should call
-`props.onSelect(props.label)`.
+Right now `App.js` has two things wired incorrectly, marked with
+a `TODO`. The `Faq` component itself is already finished — it
+calls `props.onToggle(props.id)` on click and uses `props.isOpen`
+to decide whether to show its answer. Your job is to hand it the
+right props from the parent.
 
 <SandpackSnippet folder="filterable_gallery/exercise" size="large" template="react" activeFile="/App.js" />
 
-Hints:
+### 1. Wire `onToggle` to `setOpenId`
 
-- You pass a function to `onClick`, so use an arrow function:
-  `onClick={() => props.onSelect(props.label)}`.
-- The active-tag highlight (`className={active ? ...}`) is
-  already in place — once state updates on each click, that line
-  will start lighting up the right button automatically.
+Right now the component passes:
+
+```jsx
+onToggle={() => {}}
+```
+
+That's an empty function — the click reaches `App` but nothing
+happens. You want each click to update the state, so the prop
+should be the setter itself:
+
+```jsx
+onToggle={setOpenId}
+```
+
+Now when `Faq` calls `props.onToggle(props.id)`, it's really
+calling `setOpenId(item.id)`, and `App` re-renders with the new
+`openId`. This is the exact round trip from Pass 3 — state in
+the parent, setter handed down as a prop, child calls it on an
+event.
+
+### 2. Make `isOpen` depend on `openId`
+
+Right now every `Faq` is told it's open:
+
+```jsx
+isOpen={true}
+```
+
+So every answer is always visible. You want *only* the one whose
+`id` matches `openId` to be open. That's a boolean the parent
+computes on each render:
+
+```jsx
+isOpen={openId === item.id}
+```
+
+For the item whose id matches, this is `true`; for every other
+item it's `false`. Same trick as `const active = ...` in the
+tag-filter sandbox above — the parent derives a simple
+`true`/`false` from its state and hands it to the child, so the
+child never has to know about `openId` at all.
+
+Once both lines are in place, clicking a question will update
+`openId` in `App`, which re-renders every `Faq` with a fresh
+`isOpen`, and only the clicked one will show its answer.
 
 ## Where to go from here
 

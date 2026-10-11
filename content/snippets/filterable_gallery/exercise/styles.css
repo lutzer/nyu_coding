@@ -38,3 +38,32 @@ body {
   display: block;
   border-radius: 6px;
 }
+
+.faq {
+  max-width: 480px;
+}
+
+.faq-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.faq-question {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 12px 0;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  color: inherit;
+}
+
+.faq-item.open .faq-question {
+  color: #0a7;
+}
+
+.faq-answer {
+  margin: 0 0 12px 0;
+  color: #555;
+}

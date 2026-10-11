@@ -1,37 +1,35 @@
 import { useState } from "react";
-import Tag from "./Tag";
-import Card from "./Card";
+import Faq from "./Faq";
 
-const tags = ["all", "painting", "sculpture", "photography"];
-
-const pictures = [
-  { src: "https://picsum.photos/seed/paint1/200", topic: "painting"    },
-  { src: "https://picsum.photos/seed/paint2/200", topic: "painting"    },
-  { src: "https://picsum.photos/seed/sculpt1/200", topic: "sculpture"   },
-  { src: "https://picsum.photos/seed/sculpt2/200", topic: "sculpture"   },
-  { src: "https://picsum.photos/seed/photo1/200", topic: "photography" },
-  { src: "https://picsum.photos/seed/photo2/200", topic: "photography" },
+const items = [
+  { id: "what",  question: "What is React?",         answer: "A library for building user interfaces out of components." },
+  { id: "why",   question: "Why use components?",    answer: "They let you reuse chunks of UI with different props." },
+  { id: "state", question: "What is state?",         answer: "Values a component remembers between renders." },
+  { id: "lift",  question: "What is lifting state?", answer: "Moving state up to the common parent so children can share it." },
 ];
 
 export default function App() {
-  const [selected, setSelected] = useState("all");
-
-  const visible = pictures.filter(
-    (p) => selected === "all" || p.topic === selected
-  );
+  const [openId, setOpenId] = useState(null);
 
   return (
-    <div>
-      <div className="tags">
-        {tags.map((t) => (
-          <Tag key={t} label={t} selected={selected} onSelect={setSelected} />
-        ))}
-      </div>
-      <div className="gallery">
-        {visible.map((p) => (
-          <Card key={p.src} src={p.src} topic={p.topic} />
-        ))}
-      </div>
+    <div className="faq">
+      {/* TODO: 
+        1. wire the onToggle function 
+          with setOpenId to propagate 
+          the button click.
+        2. change the isOpen condition so 
+          it is only shown when the openId 
+          is equal to the item.id */}
+      {items.map((item) => (
+        <Faq
+          key={item.id}
+          id={item.id}
+          question={item.question}
+          answer={item.answer}
+          isOpen={true}
+          onToggle={() => {}}
+        />
+      ))}
     </div>
   );
 }
