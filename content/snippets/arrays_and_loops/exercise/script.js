@@ -5,12 +5,11 @@ const numbers = [1, 2, 3, 4, 5];
 
 // 1. Use `forEach` to print each name on its own line.
 //    Hint: names.forEach((name) => { ... })
-// TODO
 
 // 2. Use `map` to build a new array where every number is doubled.
 //    Store the result in `doubled`.
-//    Hint: numbers.map((n) => n * 2)
-const doubled = []; // TODO: replace with numbers.map(...)
+//    Hint: numbers.map((n) => ...)
+const doubled = [];
 
 // --- The lines below print the result of step 2. ---
 print("--- doubled ---");

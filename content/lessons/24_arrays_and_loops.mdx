@@ -1,9 +1,23 @@
 export const title = "Arrays & Loops";
 export const chapter = "Chapter 2: Interactivity & React";
 
+## Arrays
+
+You already met arrays in the last lesson. They are variables that contain a list of values.
+
+<SandpackSnippet folder="arrays_and_loops/arrays" template="static" activeFile="/script.js" />
+
+Three things to take away from the editor:
+
+- Items are **ordered**. The first item is `colors[0]`, the next
+  is `colors[1]`, and so on. (Counting starts at `0`, not `1`.)
+- `colors.length` tells you how many items are in the array.
+- Arrays can hold any kind of value — strings, numbers, booleans,
+  even other arrays or objects, mixed if you want.
+
 # Arrays & Loops
 
-Most interesting pages are built from **lists** of things — a list
+Many pages are built from **lists** of things — a list
 of pictures in a gallery, a list of friends, a list of search
 results. In JavaScript, lists are stored in **arrays**, and most
 of the time you don't just want to *have* a list — you want to
@@ -20,24 +34,7 @@ with them now pays off twice. Just like the last lesson, every
 snippet below has a little terminal: edit the code, see the
 terminal react.
 
-## Arrays, briefly
 
-You already met arrays in the last lesson. The snippet below is a
-one-minute refresher — a couple of facts worth having at your
-fingertips, all runnable:
-
-<SandpackSnippet folder="arrays_and_loops/arrays" template="static" activeFile="/script.js" />
-
-Three things to take away from the editor:
-
-- Items are **ordered**. The first item is `colors[0]`, the next
-  is `colors[1]`, and so on. (Counting starts at `0`, not `1`.)
-- `colors.length` tells you how many items are in the array.
-- Arrays can hold any kind of value — strings, numbers, booleans,
-  even other arrays or objects, mixed if you want.
-
-Try the suggestion in the comment: add a 4th colour and read it
-back with `colors[3]`.
 
 ## A quick note on arrow functions
 
@@ -63,7 +60,7 @@ for now.)
 
 
 ```js
-// these two statements the exact same thing:
+// these two statements do the exact same thing:
 const double = (n) => n * 2;
 
 function double(n) {
@@ -162,10 +159,11 @@ Your job:
    `doubled`. The existing `print("Doubled: " + doubled)` line
    will then show the new values.
 
+<SandpackSnippet folder="arrays_and_loops/exercise" size="large" template="static" activeFile="/script.js" />
+
 If you're stuck on `map`, remember the pattern:
 
 ```js
-const doubled = numbers.map((n) => n * 2);
+// adds +1 to each number
+const raised = numbers.map((n) => n + 1);
 ```
-
-<SandpackSnippet folder="arrays_and_loops/exercise" size="large" template="static" activeFile="/script.js" />
