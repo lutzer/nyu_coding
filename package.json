@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "npm run build:gallery-zip && vite build",
     "preview": "vite preview",
-    "build:gallery-zip": "node scripts/build-gallery-starter-zip.mjs"
+    "build:gallery-zip": "node scripts/build-html-boilerplate-zip.mjs"
   },
   "dependencies": {
     "@codesandbox/sandpack-react": "^2.19.9",

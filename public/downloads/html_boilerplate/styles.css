@@ -1,0 +1,27 @@
+:root {
+  --spacing: 10px;
+}
+
+.logo {
+  width: 30px;
+  padding: var(--spacing);
+}
+
+header {
+  display: flex;
+  margin: var(--spacing);
+  padding: var(--spacing);
+  border: 1px dashed black;
+}
+
+main {
+  margin: var(--spacing);
+  padding: var(--spacing);
+  border: 1px dashed black;
+}
+
+footer {
+  margin: var(--spacing);
+  padding: var(--spacing);
+  border: 1px dashed black;
+}

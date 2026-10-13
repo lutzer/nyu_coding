@@ -5,11 +5,11 @@ import { dirname, resolve } from "node:path";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const downloadsDir = resolve(here, "..", "public", "downloads");
-const zipPath = resolve(downloadsDir, "gallery-starter.zip");
+const zipPath = resolve(downloadsDir, "html-boilerplate.zip");
 
 rmSync(zipPath, { force: true });
 
-execFileSync("zip", ["-r", "-X", "gallery-starter.zip", "gallery_starter"], {
+execFileSync("zip", ["-r", "-X", "html-boilerplate.zip", "html_boilerplate"], {
   cwd: downloadsDir,
   stdio: "inherit",
 });

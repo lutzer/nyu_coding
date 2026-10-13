@@ -69,6 +69,44 @@ Together, a slight scale + a soft shadow gives the impression that the
 element *lifted off the page* — the standard "this is interactive"
 cue.
 
+## Jumping around the page with anchor links
+
+An `<a>` tag doesn't have to link to another page. If its `href`
+starts with `#`, it links to an **id** somewhere on the *current*
+page, and clicking it jumps the browser down (or up) to that
+element.
+
+```html
+<a href="#detail-1">See details</a>
+...
+<section id="detail-1"> ... </section>
+```
+
+The `#detail-1` in the link has to match the `id="detail-1"` on the
+element you want to scroll to. Ids must be unique on the page.
+
+By default that jump is *instant* — the page just teleports. You can
+ask the browser to animate it instead with one line of CSS on the
+root element:
+
+```css
+html {
+  scroll-behavior: smooth;
+}
+```
+
+One more useful property: `scroll-margin-top`. When you scroll to an
+element, the browser lines it up with the very top of the window,
+which can feel cramped. `scroll-margin-top: 20px` tells the browser
+to leave a 20px gap above the target when scrolling to it.
+
+In the snippet below, each card is an `<a>` that links to a detail
+`<section>` further down the page. Click a card and watch the page
+smoothly scroll to it; the "Back to top" link in each detail scrolls
+you back to the heading, which has `id="top"`.
+
+<SandpackSnippet folder="gallery/scroll-demo" template="static" activeFile="/styles.css" />
+
 ## Exercise
 
 The snippet below already has the HTML — a header, a hero, a row of

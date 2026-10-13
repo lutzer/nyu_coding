@@ -8,7 +8,7 @@ Open `index.html` in your browser, or (recommended) serve it with a
 local dev server from VS Code:
 
 ```
-npx serve .
+npx live-server
 ```
 
 Then open the URL that the terminal prints (usually
