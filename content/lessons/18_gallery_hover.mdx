@@ -69,7 +69,7 @@ Together, a slight scale + a soft shadow gives the impression that the
 element *lifted off the page* — the standard "this is interactive"
 cue.
 
-## Jumping around the page with anchor links
+## Scrolling anchor links
 
 An `<a>` tag doesn't have to link to another page. If its `href`
 starts with `#`, it links to an **id** somewhere on the *current*
@@ -99,11 +99,6 @@ One more useful property: `scroll-margin-top`. When you scroll to an
 element, the browser lines it up with the very top of the window,
 which can feel cramped. `scroll-margin-top: 20px` tells the browser
 to leave a 20px gap above the target when scrolling to it.
-
-In the snippet below, each card is an `<a>` that links to a detail
-`<section>` further down the page. Click a card and watch the page
-smoothly scroll to it; the "Back to top" link in each detail scrolls
-you back to the heading, which has `id="top"`.
 
 <SandpackSnippet folder="gallery/scroll-demo" template="static" activeFile="/styles.css" />
 
