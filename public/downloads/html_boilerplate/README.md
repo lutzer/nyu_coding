@@ -1,6 +1,6 @@
 # Gallery Starter
 
-A small static website — the completed gallery from Chapter 1.
+A small static website boilerplate.
 
 ## Run it
 
@@ -18,5 +18,4 @@ Then open the URL that the terminal prints (usually
 
 - `index.html` — the page markup
 - `styles.css` — all the styling
-- `logo.svg` — the gallery logo
-- `images/` — the artwork and hero images
+- `images/` — the image folder
