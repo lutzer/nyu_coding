@@ -1,0 +1,141 @@
+export const title = "Multiple pages with a router";
+export const chapter = "Chapter 2: Interactivity & React";
+
+# Multiple Pages with a Router
+
+Every React app we've built so far has had **one** page. Click a
+tag, click an FAQ, flip a counter — the URL in the address bar
+never changed. That's fine for a single widget, but most real
+sites have more than one view: a gallery, a detail page, an
+"about" page.
+
+The usual trick in React is a **router**. A router watches the
+URL and decides which component to show. Change the URL (by
+clicking a link) and a different component renders. The page
+never actually reloads — it just swaps.
+
+This lesson adds a second page to the gallery from Lesson 30: a
+**detail page** that opens when you click a thumbnail.
+
+## The finished thing
+
+Click a painting. The URL changes, the detail page appears.
+Click "Back to gallery" and you're back where you started.
+
+<SandpackSnippet
+  folder="router/basic"
+  size="large"
+  template="react"
+  activeFile="/App.js"
+  customSetup={{ dependencies: { "react-router-dom": "^6.28.0" } }}
+/>
+
+Three pieces make this work. Let's look at them one at a time.
+
+## 1. The router — pick a URL, pick a component
+
+Open `App.js`. The whole file is just:
+
+```jsx
+<HashRouter>
+  <Routes>
+    <Route path="/" element={<Gallery />} />
+    <Route path="/painting/:id" element={<Detail />} />
+  </Routes>
+</HashRouter>
+```
+
+Read it top to bottom:
+
+- `<HashRouter>` turns on URL watching. (It uses the `#` part of
+  the URL, which is why it works even inside a sandbox like this
+  one — no server needed.)
+- `<Routes>` is a container that picks **one** matching route.
+- Each `<Route>` is a rule: *when the URL looks like `path`, show
+  `element`.*
+
+So when the URL is `/`, React renders `<Gallery />`. When the URL
+is `/painting/3`, React renders `<Detail />`. That's the entire
+router.
+
+The `:id` part of `/painting/:id` is a **URL parameter** — a
+placeholder for any value. `/painting/0`, `/painting/7`, and
+`/painting/42` all match. The actual value gets handed to
+`Detail` so it knows which painting to show.
+
+## 2. Linking — navigate without reloading
+
+Open `Gallery.js`. Instead of a plain `<img>`, each thumbnail is
+wrapped in a `<Link>`:
+
+```jsx
+<Link to={`/painting/${i}`}>
+  <img src={p.image} alt={p.title} />
+</Link>
+```
+
+`<Link>` is just a smarter `<a>` tag. The `to` prop is the URL to
+go to. When you click it, the router updates the URL and shows
+whatever route matches — **without** doing a full page reload.
+That's what makes it feel like a snappy single-page app instead
+of a 1998 website.
+
+You could use a real `<a href="...">` here, but the browser would
+reload the whole page and your React state would be wiped. `<Link>`
+avoids that.
+
+## 3. Reading the URL — `useParams`
+
+Open `Detail.js`. The first interesting line is:
+
+```jsx
+const { id } = useParams();
+```
+
+`useParams` is a hook from the router. It returns an object with
+every `:name` from the matching route. Our route was
+`/painting/:id`, so when the URL is `/painting/3`, this gives you
+`{ id: "3" }`.
+
+From there it's just an array lookup:
+
+```jsx
+const painting = paintings[id];
+```
+
+…and the rest of the component renders that painting's details.
+
+Note that `id` is a **string**, not a number — the URL is always
+text. For array indexing JavaScript coerces it automatically, so
+`paintings["3"]` works. If you were doing math on it, you'd want
+`Number(id)` first.
+
+## The round trip
+
+Put the three pieces together and the flow is:
+
+1. User clicks a `<Link to="/painting/3">`.
+2. The router updates the URL to `#/painting/3`.
+3. `<Routes>` finds the matching `<Route>` and renders `<Detail />`.
+4. `<Detail>` calls `useParams()`, gets `id === "3"`, and shows
+   painting number 3.
+
+Clicking "Back to gallery" does the same thing in reverse — a
+`<Link to="/">` sends the URL back to `/`, and `<Gallery />` takes
+over again.
+
+## Why not just use `useState`?
+
+Technically you could track "which page are we on" with a piece
+of state, same as the tag filter in Lesson 30. That works for two
+pages. But a router gives you three things state can't:
+
+- **The URL reflects where you are.** Share the link, bookmark
+  it, reload the page — you land on the same view.
+- **The Back and Forward buttons work.** The browser remembers
+  the URL history for free.
+- **New pages are cheap.** Adding an "about" page is one more
+  `<Route>`; no state surgery.
+
+Once an app has more than one meaningful view, a router is almost
+always the right call.

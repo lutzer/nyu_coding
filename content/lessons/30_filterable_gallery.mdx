@@ -195,16 +195,3 @@ child never has to know about `openId` at all.
 Once both lines are in place, clicking a question will update
 `openId` in `App`, which re-renders every `Faq` with a fresh
 `isOpen`, and only the clicked one will show its answer.
-
-## Where to go from here
-
-You now have a complete small React app: components, props,
-state, events, lists, and lifting state up. The patterns don't
-really get bigger than this — real apps are mostly just more
-components wired the same way.
-
-Natural next steps, when you're ready: loading data from a file
-or an API (`useEffect` + `fetch`), building forms with
-**controlled inputs** (same `onChange` + state pattern), and
-splitting a growing `App.js` into smaller files using the
-`import` / `export` you learned in Lesson 27.
