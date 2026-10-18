@@ -64,7 +64,7 @@ is `"all"`).
 Then the JSX just maps over `visible` instead of `pictures`:
 
 ```jsx
-{visible.map((p) => <img key={p.src} src={p.src} alt={p.topic} />)}
+{visible.map((p) => <Card key={p.title} image={p.image} title={p.title} />)}
 ```
 
 React re-runs `App` every time `selected` changes, which means

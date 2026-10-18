@@ -1,0 +1,46 @@
+export const title = "JSON data";
+export const chapter = "Chapter 2: Interactivity & React";
+
+# Including JSON Data
+
+So far every list of data has lived right inside `App.js` as a
+JavaScript array. That works, but once the data gets bigger — or
+once you want to edit it without touching your code — it's nicer
+to keep it in its own file.
+
+**JSON** (JavaScript Object Notation) is the standard format for
+that. It looks almost exactly like a JavaScript array of objects,
+but the keys are wrapped in double quotes and there are no
+trailing commas.
+
+<SandpackSnippet folder="json_data/basic" size="large" template="react" activeFile="/App.js" />
+
+## The data file
+
+Open `data.json`. It's just an array of objects — one per
+painting:
+
+```json
+[
+  { "title": "Mona Lisa", "artist": "Leonardo da Vinci", "year": 1503 },
+  ...
+]
+```
+
+No `const`, no `export` — a `.json` file is pure data, not code.
+
+## Importing it
+
+At the top of `App.js`:
+
+```js
+import paintings from "./data.json";
+```
+
+The bundler reads the file, parses it, and hands you the array as
+`paintings`. From there it's an ordinary array — you can `.map`,
+`.filter`, or pass it around just like the inline lists from the
+previous lessons.
+
+Try adding another painting to `data.json` and watch the list
+update.

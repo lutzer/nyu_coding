@@ -1,17 +1,9 @@
 import { useState } from "react";
 import Tag from "./Tag";
 import Card from "./Card";
+import pictures from "./data.json";
 
 const tags = ["all", "painting", "sculpture", "photography"];
-
-const pictures = [
-  { src: "https://picsum.photos/seed/paint1/200", topic: "painting"    },
-  { src: "https://picsum.photos/seed/paint2/200", topic: "painting"    },
-  { src: "https://picsum.photos/seed/sculpt1/200", topic: "sculpture"   },
-  { src: "https://picsum.photos/seed/sculpt2/200", topic: "sculpture"   },
-  { src: "https://picsum.photos/seed/photo1/200", topic: "photography" },
-  { src: "https://picsum.photos/seed/photo2/200", topic: "photography" },
-];
 
 export default function App() {
   const [selected, setSelected] = useState("all");
@@ -29,7 +21,7 @@ export default function App() {
       </div>
       <div className="gallery">
         {visible.map((p) => (
-          <Card key={p.src} src={p.src} topic={p.topic} />
+          <Card key={p.title} image={p.image} title={p.title} />
         ))}
       </div>
     </div>

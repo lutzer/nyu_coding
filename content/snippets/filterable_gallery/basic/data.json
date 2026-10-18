@@ -1,0 +1,79 @@
+[
+  {
+    "title": "Mona Lisa",
+    "artist": "Leonardo da Vinci",
+    "year": 1503,
+    "topic": "painting",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Mona_Lisa.jpg/500px-Mona_Lisa.jpg"
+  },
+  {
+    "title": "The Starry Night",
+    "artist": "Vincent van Gogh",
+    "year": 1889,
+    "topic": "painting",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/500px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg"
+  },
+  {
+    "title": "The Great Wave",
+    "artist": "Katsushika Hokusai",
+    "year": 1831,
+    "topic": "painting",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Tsunami_by_hokusai_19th_century.jpg/500px-Tsunami_by_hokusai_19th_century.jpg"
+  },
+  {
+    "title": "The Scream",
+    "artist": "Edvard Munch",
+    "year": 1893,
+    "topic": "painting",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg/500px-Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg"
+  },
+  {
+    "title": "Girl with a Pearl Earring",
+    "artist": "Johannes Vermeer",
+    "year": 1665,
+    "topic": "painting",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/1665_Girl_with_a_Pearl_Earring.jpg/500px-1665_Girl_with_a_Pearl_Earring.jpg"
+  },
+  {
+    "title": "The Thinker",
+    "artist": "Auguste Rodin",
+    "year": 1904,
+    "topic": "sculpture",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Le_Penseur_by_Rodin_%28Kunsthalle_Bielefeld%29_2014-04-10.JPG/500px-Le_Penseur_by_Rodin_%28Kunsthalle_Bielefeld%29_2014-04-10.JPG"
+  },
+  {
+    "title": "David",
+    "artist": "Michelangelo",
+    "year": 1504,
+    "topic": "sculpture",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/%27David%27_by_Michelangelo_Fir_JBU004.jpg/500px-%27David%27_by_Michelangelo_Fir_JBU004.jpg"
+  },
+  {
+    "title": "Venus de Milo",
+    "artist": "Unknown",
+    "year": -100,
+    "topic": "sculpture",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Front_views_of_the_Venus_de_Milo.jpg/500px-Front_views_of_the_Venus_de_Milo.jpg"
+  },
+  {
+    "title": "Migrant Mother",
+    "artist": "Dorothea Lange",
+    "year": 1936,
+    "topic": "photography",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Lange-MigrantMother02.jpg/500px-Lange-MigrantMother02.jpg"
+  },
+  {
+    "title": "The Steerage",
+    "artist": "Alfred Stieglitz",
+    "year": 1907,
+    "topic": "photography",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Alfred_Stieglitz_-_The_Steerage_-_Google_Art_Project.jpg/500px-Alfred_Stieglitz_-_The_Steerage_-_Google_Art_Project.jpg"
+  },
+  {
+    "title": "View from the Window at Le Gras",
+    "artist": "Nicéphore Niépce",
+    "year": 1827,
+    "topic": "photography",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Untitled_%28point_de_vue%29%2C_Ni%C3%A9pce_1827_%E2%80%94_HRC_2020_%28cropped%29.jpg/500px-Untitled_%28point_de_vue%29%2C_Ni%C3%A9pce_1827_%E2%80%94_HRC_2020_%28cropped%29.jpg"
+  }
+]

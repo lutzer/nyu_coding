@@ -1,3 +1,3 @@
 export default function Card(props) {
-  return <img src={props.src} alt={props.topic} />;
+  return <img src={props.image} alt={props.title} />;
 }
