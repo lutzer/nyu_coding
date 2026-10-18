@@ -1,0 +1,121 @@
+export const title = "Setting up a React project locally";
+export const chapter = "Chapter 2: Interactivity & React";
+
+# Setting up a React Project Locally
+
+In [Lesson 19](/l/19_local_ide_setup) you installed **VS Code** and
+**Node.js** and ran a plain HTML page from your own machine. Everything
+in Chapter 2 ran in the little in-browser sandbox. Time to move React
+out of the sandbox and onto your computer, using the same editor and
+toolchain.
+
+A React project needs a bit more than a static HTML page. Browsers
+don't speak JSX directly — something has to translate it. That
+something is a **dev server** called **Vite**. It watches your files,
+compiles the JSX, and reloads the page in your browser when you save.
+
+## 1. Check your tools
+
+You already installed these in Lesson 19, but verify they're still
+there. Open a terminal (VS Code: **Terminal → New Terminal**) and run:
+
+```sh
+node --version
+npm --version
+```
+
+Both should print a version number. If not, go back to
+[Lesson 19](/l/19_local_ide_setup) and install **Node.js**.
+
+## 2. Download the React starter
+
+<a
+   href={`${import.meta.env.BASE_URL}downloads/react-starter.zip`}
+   target="_blank"
+>
+   Download react-starter.zip
+</a>
+
+Unzip it. You'll get a `react_starter/` folder. It contains the same
+little gallery-with-router from Lesson 31, ready to run as a real
+project.
+
+## 3. Open the project in VS Code
+
+1. Launch **Visual Studio Code**.
+2. From the menu bar choose **File → Open Folder…** (Mac: **File →
+   Open…**) and pick the `react_starter` folder you just unzipped.
+3. In the sidebar on the left you'll see the files. The structure is
+   different from the HTML boilerplate:
+
+```
+react_starter/
+├── index.html
+├── package.json
+├── vite.config.js
+├── public/
+│   └── logo.svg
+└── src/
+    ├── main.jsx
+    ├── App.jsx
+    ├── Header.jsx
+    ├── Footer.jsx
+    ├── Hero.jsx
+    ├── Gallery.jsx
+    ├── Detail.jsx
+    ├── data.json
+    └── styles.css
+```
+
+The core files inside `src/` are the ones from Lesson 31 — same
+`App.jsx`, same `Gallery.jsx`, same `Detail.jsx` — plus a small
+layout wrapped around them: `Header`, `Footer`, and a `Hero` section
+on the gallery page. The files at the top (`package.json`,
+`vite.config.js`, `index.html`) are the project's scaffolding.
+
+## 4. Install the dependencies
+
+A React project depends on a few libraries: `react`, `react-dom`, and
+in our case `react-router-dom`. They're listed in `package.json`, but
+they aren't downloaded yet. Open the terminal in VS Code (**Terminal →
+New Terminal**) and run:
+
+```sh
+npm install
+```
+
+npm reads `package.json` and downloads everything into a new
+`node_modules/` folder. This takes a minute the first time. You only
+need to do it once per project.
+
+## 5. Run the dev server
+
+```sh
+npm run dev
+```
+
+Vite will print a URL that looks like `http://localhost:5173`. Open it
+in your browser — you should see the gallery. Click a painting, you
+land on its detail page. The URL changes but the page never fully
+reloads, exactly like in the Lesson 31 sandbox.
+
+Now edit `src/Gallery.jsx` — change some text, hit save. The browser
+updates on its own. That's **hot reload**, and it's the biggest reason
+to use a dev server instead of double-clicking `index.html`.
+
+## 6. Stop the dev server
+
+When you're done, click into the terminal and press `Ctrl + C` (same
+on Mac). Vite stops; the browser tab stays open but won't update
+anymore. Run `npm run dev` again whenever you want to come back.
+
+## What you now have
+
+- A real React project on your machine, with Vite doing the JSX
+  compilation and hot reload.
+- A starting point for your own projects. Copy the folder, rename it,
+  edit `src/`, and keep going.
+
+From here you can build anything the sandbox lessons showed, plus
+more: add pages, add components, add libraries from npm. You've got
+the same setup real teams use.
