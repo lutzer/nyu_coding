@@ -1,0 +1,16 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 24px;
+  color: #222;
+}
+
+h2 {
+  color: steelblue;
+  margin-top: 24px;
+}
+
+video, audio {
+  width: 100%;
+  max-width: 480px;
+  display: block;
+}

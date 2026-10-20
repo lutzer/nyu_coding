@@ -1,0 +1,63 @@
+export const title = "Deploying with Netlify";
+export const chapter = "Chapter 3: 3D, Media & Deployment";
+
+# Deploying Your App to the Web
+
+Everything so far has run on `localhost` — only visible to you.
+A deployed site is one you can share with a link, open on your phone,
+send to a friend. This lesson gets your React app online for free
+using [**Netlify**](https://www.netlify.com).
+
+The flow has two parts:
+
+1. **Build** — turn your source code into a static folder of HTML,
+   CSS, and JS that any web server can serve.
+2. **Deploy** — upload that folder (or let Netlify do it from GitHub).
+
+## 1. Open the project 
+
+Open your own react project or download the react-starter project from [Lesson 32](#l/32_local_react_setup).
+
+## 2. Build your project
+
+In your project folder, run:
+
+```sh
+npm run build
+```
+
+Vite reads `src/`, bundles everything, and writes the result into a
+new folder called `dist/`. Open it — you'll see an `index.html`, a
+few hashed `.js` and `.css` files, and whatever you put in `public/`.
+That folder is your whole website. It has no Node, no React, no JSX
+left in it — just the plain web files a browser understands.
+
+You can preview the production build locally:
+
+```sh
+npm run preview
+```
+
+Vite serves `dist/` on `http://localhost:4173`. If it works there, it
+will work on Netlify.
+
+## 3. Sign up for Netlify
+
+Go to [netlify.com](https://www.netlify.com) and sign up — a free
+account is fine. You can register with GitHub, Google, or email.
+
+## 4. Deploy by drag-and-drop
+
+Once you're logged in:
+
+1. Open [app.netlify.com/drop](https://app.netlify.com/drop).
+2. Drag your `dist/` folder onto the page.
+3. Wait a few seconds.
+
+Netlify uploads the files and gives you a public URL like
+`https://ornate-pie-123abc.netlify.app`. That's it — your site is
+live. Share the link.
+
+To publish an update, run `npm run build` again and drag the new
+`dist/` onto the same site in the Netlify dashboard. Each drop
+replaces the previous version.

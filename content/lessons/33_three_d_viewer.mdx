@@ -1,0 +1,125 @@
+export const title = "3D Viewer with Three.js";
+export const chapter = "Chapter 3: 3D, Media & Deployment";
+
+# A 3D Viewer with Three.js
+
+So far every page has been flat — HTML, images, maybe a bit of CSS
+animation. Time to put real 3D in the browser.
+
+The workhorse library for 3D on the web is
+[**Three.js**](https://threejs.org). It wraps WebGL (the browser's
+low-level 3D API) in something humans can actually use: scenes,
+cameras, lights, meshes.
+
+Using Three.js directly from React means wiring up a canvas, a render
+loop, resize handlers, and cleanup by hand. **React Three Fiber**
+(`@react-three/fiber`) does all of that for you — you describe the
+3D scene with JSX components, exactly like regular React. A companion
+library, **@react-three/drei**, adds a pile of ready-made helpers
+(camera controls, loaders, lights).
+
+## 1. Your first scene — a spinning cube
+
+Here's the whole thing. Click and drag the viewer to rotate the
+camera, scroll to zoom:
+
+<SandpackSnippet
+  folder="three_d_viewer/cube"
+  size="large"
+  template="react"
+  activeFile="/App.js"
+  customSetup={{
+    dependencies: {
+      "react": "19.0.0",
+      "react-dom": "19.0.0",
+      "three": "0.172.0",
+      "@react-three/fiber": "9.1.2",
+      "@react-three/drei": "10.0.6"
+    }
+  }}
+/>
+
+Read `App.js` top to bottom. Everything inside `<Canvas>` is 3D:
+
+- `<Canvas>` is the drawing surface. It replaces what used to be a
+  `<canvas>` tag plus a hundred lines of setup code.
+- `<ambientLight>` lights the whole scene evenly, so nothing is pitch
+  black.
+- `<directionalLight>` is like the sun — it has a position and casts
+  parallel rays.
+- `<mesh>` is one 3D object. It needs two children:
+  - A **geometry** — the shape (here, a cube).
+  - A **material** — the surface (here, a matte orange).
+  - Plus `<Edges>` from drei, which draws black lines along the hard
+    edges.
+- `<OrbitControls>` lets the mouse move the camera. That's the whole
+  reason you can rotate and zoom — remove it and the view locks.
+
+The cube isn't actually rotating — `<OrbitControls autoRotate />`
+tells the camera to orbit around the scene on its own. Click and
+drag and the auto-rotation pauses until you let go.
+
+Try changing `color="orange"` to anything, or swap `boxGeometry` for
+`sphereGeometry` — the preview updates immediately.
+
+## 2. Load a real 3D model
+
+Boxes and spheres are fine, but you probably want to show an actual
+model. The standard format on the web is **glTF** (`.gltf` or `.glb` —
+`.glb` is a single packed binary file, easier to handle).
+
+The snippet below loads a sample astronaut model from a public URL,
+so you can play with it without downloading anything:
+
+<SandpackSnippet
+  folder="three_d_viewer/model"
+  size="large"
+  template="react"
+  activeFile="/App.js"
+  customSetup={{
+    dependencies: {
+      "react": "19.0.0",
+      "react-dom": "19.0.0",
+      "three": "0.172.0",
+      "@react-three/fiber": "9.1.2",
+      "@react-three/drei": "10.0.6"
+    }
+  }}
+/>
+
+Two new pieces compared to the cube:
+
+- **`useGLTF`** is a hook from drei that loads a glTF file. It
+  returns the parsed scene; `<primitive object={scene} />` drops
+  that scene straight into your 3D world.
+- **`<Stage>`** auto-frames the model and adds nice lighting and a
+  soft contact shadow. For a quick-and-dirty viewer it beats
+  configuring lights by hand.
+
+The `<Suspense>` wrapper is there because `useGLTF` has to download
+the file over the network — Suspense tells React "it's fine if this
+isn't ready yet, show nothing until it is."
+
+Try swapping the `MODEL_URL` for Three.js's famous damaged helmet:
+
+```
+https://threejs.org/examples/models/gltf/DamagedHelmet/glTF-Binary/DamagedHelmet.glb
+```
+
+## 3. Doing this in your own project
+
+To build the same viewer in the local project from
+[Lesson 32](#l/32_local_react_setup), you'd:
+
+1. Stop the dev server, then install the three packages:
+
+   ```sh
+   npm install three @react-three/fiber @react-three/drei
+   ```
+
+2. Create a `src/Viewer.jsx` with the same `App.js` body you see
+   above (just rename the component).
+3. Drop a `.glb` file into `public/` and reference it as
+   `/your-model.glb` — anything in `public/` is served from the
+   site root.
+4. Import `<Viewer />` from `App.jsx` and drop it on the page.

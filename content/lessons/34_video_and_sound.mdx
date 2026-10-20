@@ -1,0 +1,118 @@
+export const title = "Video and Sound";
+export const chapter = "Chapter 3: 3D, Media & Deployment";
+
+# Video and Sound
+
+Images aren't the only media you can embed. The browser has
+built-in support for **video** and **audio** — no library needed.
+Two tags do all the work: `<video>` and `<audio>`.
+
+## 1. A video and an audio player
+
+Open the snippet, press play on either one:
+
+<SandpackSnippet
+  folder="video_and_sound/media"
+  size="large"
+  template="react"
+  activeFile="/App.js"
+/>
+
+The whole player is two JSX tags:
+
+```jsx
+<video src={VIDEO_URL} controls />
+<audio src={AUDIO_URL} controls />
+```
+
+Both tags work exactly like `<img>`: they take a `src` pointing at a
+file. Add `controls` and the browser draws a full play/pause/scrub
+bar for free.
+
+A few props worth knowing:
+
+```jsx
+<video
+  src="/clip.mp4"
+  controls      // show the play bar
+  autoPlay      // start playing on load
+  loop          // restart when it ends
+  muted         // required for autoplay in most browsers
+  playsInline   // iOS: play inline instead of fullscreen
+  style={{ width: "100%" }}
+/>
+```
+
+In React, the HTML attributes you'd write lowercase (`autoplay`,
+`playsinline`) become camelCase (`autoPlay`, `playsInline`). That's
+the only React-specific thing here.
+
+**Autoplay gotcha:** modern browsers block videos that auto-play
+with sound. If you want autoplay to work, you also need `muted`. The
+user can un-mute from the controls.
+
+**Format gotcha:** browser support is widest for **MP4** (H.264) video
+and **MP3** or **AAC** audio. If a file refuses to play, convert it to
+one of those first.
+
+In your own project, drop media files into `public/` so Vite serves
+them from the site root:
+
+```
+public/
+├── clip.mp4
+└── song.mp3
+```
+
+Then `<video src="/clip.mp4" />` and `<audio src="/song.mp3" />`
+work the same way.
+
+## 2. Driving playback from your own buttons
+
+Sometimes you want more than the default controls — a custom Play
+button, a sound effect on click, background music with no visible
+player. The snippet below shows both: the `<video>` has no
+`controls`, so nothing shows until you press **Play**. The **Ding**
+button fires an `<audio>` element that has no visible player at all:
+
+<SandpackSnippet
+  folder="video_and_sound/controlled"
+  size="large"
+  template="react"
+  activeFile="/App.js"
+/>
+
+The trick is a **ref**. `useRef` is a React hook that gives you a
+persistent box; `videoRef.current` holds the actual `<video>` DOM
+element once it's mounted:
+
+```jsx
+import { useRef } from "react";
+
+const videoRef = useRef(null);
+
+<video ref={videoRef} src="/clip.mp4" />
+<button onClick={() => videoRef.current.play()}>Play</button>
+<button onClick={() => videoRef.current.pause()}>Pause</button>
+```
+
+Once you have the element you can call `.play()`, `.pause()`, read
+`.currentTime`, set `.volume`, and so on. The full list of methods
+and properties is on
+[MDN's HTMLMediaElement page](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement).
+
+Same pattern works for `<audio>` — a button that plays a short sound
+effect is three lines:
+
+```jsx
+const dingRef = useRef(null);
+<audio ref={dingRef} src="/ding.mp3" />
+<button onClick={() => dingRef.current.play()}>Ding</button>
+```
+
+## What you now know
+
+- `<video>` and `<audio>` are built-in — no extra packages.
+- Drop media files in `public/`, reference them from `/`.
+- `controls` gives you a free player; `autoPlay` needs `muted`.
+- A `ref` lets you drive playback from your own buttons or effects.
