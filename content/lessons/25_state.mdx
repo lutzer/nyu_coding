@@ -9,20 +9,19 @@ making the page actually **change** in response: a counter that
 goes up, an image that appears and disappears, a tag that gets
 highlighted.
 
-For that we need a kind of value that is special in two ways:
+Here's a counter that works — click it a few times:
 
-1. It **survives** across renders — a plain variable gets reset
-   every time the component function runs.
-2. When it changes, it **tells React** so React can render the
-   component again with the new value.
+<SandpackSnippet folder="interactivity/counter" size="large" template="react" activeFile="/App.js" />
 
-That's what **state** is, and React gives it to us through a
-function called `useState`.
+The number on the button goes up every time you click. The rest
+of this lesson is about *how* that works, because there's a bit
+more going on than meets the eye.
 
 ## Why a normal variable doesn't work
 
-Try this in your head: you want a counter that goes up by one
-every time you click. The obvious try is:
+Before we unpack what the snippet does, let's see why the
+*obvious* version fails. If you were guessing, you might write
+the counter like this:
 
 ```jsx
 export default function App() {
@@ -38,6 +37,17 @@ export default function App() {
 It doesn't work. The variable `count` *does* change — but React
 has no way of knowing it changed, so it never re-renders. The
 button on screen keeps showing `0`.
+
+What we need is a value that is special in two ways:
+
+1. It **survives** across renders — a plain variable gets reset
+   every time the component function runs.
+2. When it changes, it **tells React** so React can render the
+   component again with the new value.
+
+That's what **state** is, and React gives it to us through a
+function called `useState` — the thing you saw at the top of the
+counter snippet.
 
 ## `useState`
 
@@ -65,13 +75,10 @@ The square-bracket syntax (`const [a, b] = ...`) is called **array
 destructuring** — it just unpacks the two things `useState` hands
 back into two named variables.
 
-Here's the counter done properly — click a few times:
-
-<SandpackSnippet folder="interactivity/counter" size="large" template="react" activeFile="/App.js" />
-
 Every `setCount` call causes React to run the `App` function
 again, and this time `useState(0)` hands back the stored value
-instead of the initial `0`.
+instead of the initial `0`. That's why the number on the counter
+goes up instead of resetting.
 
 ## The render loop
 

@@ -11,7 +11,14 @@ unreadable fast.
 The real power of React is that **you can define your own tags**.
 If you want a `<Card>`, you just write one — and from then on you
 can drop `<Card />` into your JSX the same way you'd drop in an
-`<img />`.
+`<img />`. Here's what that looks like — three `<Card />` tags on
+the page, all coming from one definition:
+
+<SandpackSnippet folder="custom_components/basic" size="large" template="react" activeFile="/App.js" />
+
+Open `App.js` and you'll see `<Card />` used three times, and a
+`Card` function defined just above `App`. The rest of this section
+walks through how those two pieces fit together.
 
 ## Defining a component
 
@@ -57,11 +64,10 @@ export default function App() {
 }
 ```
 
-Three cards appear on the page. The real win: when you want to
-change what a card looks like, you edit `Card` in one place and
-every `<Card />` on the page updates.
-
-<SandpackSnippet folder="custom_components/basic" size="large" template="react" activeFile="/App.js" />
+Three cards appear on the page — exactly what you saw in the
+snippet above. The real win: when you want to change what a card
+looks like, you edit `Card` in one place and every `<Card />` on
+the page updates.
 
 ## A quick detour: objects
 
